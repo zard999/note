@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var obj = {
+				'2': 2,
+				'3': 4,
+				'length': 2,
+				'splice': Array.prototype.splice,
+				'push': Array.prototype.push
+			}
+			
+			obj.push(1); // this[this.length] -> obj[2] = 1
+			obj.push(2); // this[this.length] -> obj[3] = 2
+			console.log(obj[0], obj[1], obj[2], obj[3], obj.length); // [empty,empty,'1', '2'];
+		</script>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var fn = (
+				function test1(){
+					return 1;
+				},
+			
+				function test2(){
+					return '2';
+				}
+			)();
+			
+			console.log(typeof(fn));  // string
+			
+			/* 
+			 * 因为逗号也是运算符
+			 * 所以fn返回test2()然后返回了2
+			 */
+			
+			
+			// var fn1 = {
+			// 	name: 15,
+			// 	setSaying: function(){
+					
+			// 	}
+			// };
+			
+			// console.log(fn1);
+		</script>
+	</body>
+</html>

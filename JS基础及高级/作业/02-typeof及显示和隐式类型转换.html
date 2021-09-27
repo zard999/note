@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/* typeof */
+			var a;			// undefined string NaN true
+			var a = '';		// string string 0 false
+			var a = null;	// object string 0 false
+			var a = [];		// object string 0 flase
+			var a = {};		// object string 0(NaN) true
+			var a = undefined; // undefined string NaN true
+			var a = NaN;	// NaN(number) string NaN true
+			var a = '123';	// string string 123 false
+			var a = 'a';	// string string NaN true 
+			var a = '1a';	// string string NaN true
+			
+			// console.log(typeof(a), typeof(typeof(a)), Number(a), isNaN(a));
+			
+			/* 显示类型转换 */
+			// parseInt
+			var b;			// (number) (NaN)
+			var b = 123;	// number 123
+			var b = '123';	// number 123
+			var b = 'abc123'// number NaN
+			var b = '123abc'// number 123
+			
+			// parseFloat
+			var b = '3.1415926';// number 3(3.1415936) 3.14
+			var b = '3.19542';  // number 3.19542 3.20
+			
+			// boolean
+			
+			var b = null;	// Boolean 0(false)
+			var b = undefined; // Boolean flase
+			var b = '';		// Boolean false
+			var b = NaN; 	// Boolean false
+			var b = false 	// Boolean false
+			var b = 0; 		// Boolean false 
+			
+			// console.log(typeof(parseInt(b)), parseInt(b));
+			// console.log(parseInt(a, 16));
+			// console.log(typeof(parseFloat(b)), parseFloat(b), parseFloat(b).toFixed(2));
+			console.log(typeof(Boolean(b)) ,Boolean(b));
+			
+			/* 隐式类型转换 */
+			
+			var c;
+			
+			
+		</script>
+	</body>
+</html>

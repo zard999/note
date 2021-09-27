@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="artical"></div>
+		<script type="text/html" id="tpl">
+			<div class="wrap">
+				<h1>{{title}}</h1>
+				<h3>{{author}}</h3>
+				<p>{{content}}</p>
+			</div>
+		</script>
+		<script type="text/javascript">
+			var tpl = document.getElementById('tpl').innerHTML,
+				artical = document.getElementsByClassName('artical')[0];
+
+			var reg = /{{(.*?)}}/g;
+
+			artical.innerHTML = tpl.replace(reg, function(node, key) {
+				return {
+					title: '这是一个模板替换的测试',
+					author: '张永辉',
+					content: '这是我要做的一个模板替换的测试，它是一个非常重要的知识点',
+				}[key];
+			})
+		</script>
+	</body>
+</html>

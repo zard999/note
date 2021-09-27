@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function myInstanceof(A, B){
+            var _A = A.__proto__,
+                _B = B.prototype;
+
+                while(_A != _B){
+                    _A = _A.__proto__;
+                    if (!_A){
+                        return false;
+                    }
+                }
+                return true;
+        }
+        console.log(myInstanceof([1, 2], Array));
+        console.log(myInstanceof({}, Function));
+        console.log(myInstanceof(Object, Function));
+    </script>
+</body>
+</html>

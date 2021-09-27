@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 算出第n列
+			var n = parseInt(window.prompt("N="));
+			// i = 1 j = 1  2  3  5  8
+
+			// 循环
+			function fibonacci(n) {
+				var a = 1;
+				var b = 1;
+				var sum = b;
+
+				for (var i = 2; i < n; i++) {
+					sum = a + b;
+					a = b;
+					b = sum;
+				}
+
+				return sum;
+			}
+
+			// 递归
+			function fibonacci2(n) {
+				if (n <= 2) {
+					return 1
+				};
+
+				return fibonacci2(n - 1) + fibonacci2(n - 2);
+			}
+
+			document.write(fibonacci2(n));
+
+			// 数组
+			function Fibonaq(num) {
+				var arr = [1, 1];
+
+				for (var i = 2; i <= num; i++) {
+					arr[i] = arr[i - 1] + arr[i - 2];
+				}
+
+				return arr[num];
+			}
+			
+			
+			// 二进制转换
+			function test(num){
+				// 将余数压入栈中
+				var arr = [],
+					r = null,
+					s = '';
+					
+					while(num){
+						r = num % 2;
+						arr.push(r);
+						num = parseInt(num / 2);
+					}
+					
+					while(arr.length){
+						s += arr.pop();
+					}
+					
+					return s;
+			}	
+		</script>
+	</body>
+</html>

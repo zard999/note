@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="wrap">
+			<div>
+				<p>我是段落标签</p>
+				<a href="">我是超链接</a>
+			</div>
+			<div>
+				<span>我是span元素</span>
+				<div>
+					<ul>
+						<li>我是li标签</li>
+						<li>我是li标签</li>
+						<li>我是li标签</li>
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 作业4 遍历一个父级元素下面的所有的子元素节点，包括孙子，曾孙(递归)
+			var box = document.getElementById('wrap');
+
+			getFullChildren(box);
+			
+			function getFullChildren(node) {
+				var children = node.childNodes,
+					len = children.length,
+					item;
+					
+				// 如果node存在并别node.nodeType === 1时，就打印它	
+				if (node && node.nodeType === 1){
+					console.log(node);
+				}
+				
+				for (var i = 0 ; i < len; i++){
+					item = children[i];
+					if (item.nodeType === 1){
+						getFullChildren(item);
+						// 把所有只要时元素节点的都递归
+					}
+				}
+
+			}
+
+		</script>
+	</body>
+</html>

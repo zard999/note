@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 第一题
+			// function test(){
+			// 	// a : undefined  function a()
+			// 	return a;
+			// 	a = 1;
+			// 	function a(){
+			// 		var a = 2;
+			// 	}
+			// }
+			// 	console.log(test()); //1 错了 应该是function a(){}
+
+			// 第二题
+			// function test2() {
+			// 	a = 1;
+
+			// 	function a() {}
+			// 	a = 2;
+			// 	return a;
+			// 	/* 
+			// 	 * AO: a:undefined -> 1
+			// 	 * GO: test2() : a : undefined -> a() -> 1 -> 2 
+			// 	 */
+			// }
+
+			// console.log(test2()); // 空 错了 是
+			
+			
+			a = 1;
+			function test3(e){
+				
+				function e(){}
+				
+				arguments[0] = 2; // e的实参是2
+				
+				console.log(e);	 //function
+				
+				if (a){ //
+					var b = 3;
+				}
+				console.log(a);
+				
+				var c;
+				a = 4;
+				// var a;
+				console.log(b); // error
+				f = 5;
+				console.log(c); // undefined
+				console.log(a); // 4
+				
+				e();
+			}
+
+			var a;
+			test3();
+			console.log(a); // 1
+			console.log(f); // error
+			/* 
+			 * GO: a:undefined -> 1,
+			 *     f:undefined -> 5
+			 * AO: e:undefined -> e() -> 2,
+			 * 	   b:undefined,
+			 *     c:undefined,
+			 *     a:undefined
+			 * 
+			 * 2 undefined undefined undefined
+			 * f e() undefined undefined 4
+			 */
+			
+		</script>
+	</body>
+</html>

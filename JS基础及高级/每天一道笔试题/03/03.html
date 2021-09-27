@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 10 10 10 因为var i的作用域是在全局,
+			// 当执行res.push()时,for循环早已结束,
+			// 此时i=10,所以res[0] res[1] res[2]都是10,所以结果也是10
+			
+			// 解决办法:将var i 换成let i,此时的i的作用域就是块级作用域,不会跑到{}外面去,所以就能输出0,1,2
+		</script>
+	</body>
+</html>

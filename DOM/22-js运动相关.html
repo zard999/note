@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+				padding: 10px;
+				background-color: #bfa;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<script type="text/javascript">
+			var oDiv = document.getElementsByTagName('div')[0];
+			
+			oDiv.addEventListener('click', function(){
+				// var width = this.offsetWidth;  // 有padding用offsetWidth就会导致计算出错
+				var width = parseInt(getStyle(this, 'width'));
+				
+				this.style.width = width + 10 + 'px';
+			})
+			
+			function getStyle(elem, prop) {
+				if (window.getComputedStyle) {
+					if (prop) {
+						return window.getComputedStyle(elem, null)[prop];
+					} else {
+						return window.getComputedStyle(elem, null);
+					}
+				} else {
+					if (prop) {
+						return elem.currentStyle[prop];
+					} else {
+						return elem.currentStyle;
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

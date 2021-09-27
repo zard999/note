@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .wrap {
+            width: 300px;
+            height: 667px;
+            margin: 0 auto;
+            border: 1px solid #000;
+        }
+
+        .course-bd .tab {
+            height: 44px;
+            background-color: #000;
+        }
+
+        .course-bd .item {
+            float: left;
+            width: 100px;
+            height: 42px;
+            line-height: 44px;
+            text-align: center;
+        }
+
+        .course-bd .item.cur {
+            border-bottom: 2px solid #fff;
+        }
+
+        .item a {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="course-bd">
+            <div class="tab">
+                <div class="item cur" data-filed="all">
+                    <a href="javascript:;" class="lk">全部课程</a>
+                </div>
+                <div class="item" data-filed="free">
+                    <a href="javascript:;" class="lk">免费课程</a>
+                </div>
+                <div class="item" data-filed="no_free">
+                    <a href="javascript:;" class="lk">VIP课程</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+
+        </div>
+    </div>
+    <div id="data" style="display: none;">
+        [{"id":"1","course":"前端开发之企业级深度JavaScript特训课【JS++前端】","classes":"19","teacher":"小野","img":"ecmascript.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+        {"id":"2","course":"WEB前端工程师就业班之深度JSDOM+讲师辅导-第3期【JS++前端】","classes":"22","teacher":"小野","img":"dom.jpg","is_free":"0","datetime":"1540454477","price":"699"},
+        {"id":"3","course":"前端开发之企业级深度HTML特训课【JS++前端】","classes":"3","teacher":"小野","img":"html.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+        {"id":"4","course":"前端开发之企业级深度CSS特训课【JS++前端】","classes":"5","teacher":"小野","img":"css.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+        {"id":"5","course":"前端就业班VueJS+去哪儿网+源码课+讲师辅导-第3期【JS++前端】","classes":"50","teacher":"哈默","img":"vuejs.jpg","is_free":"0","datetime":"1540454477","price":"1280"},
+        {"id":"6","course":"前端就业班ReactJS+新闻头条实战+讲师辅导-第3期【JS++前端】","classes":"21","teacher":"托尼","img":"reactjs.jpg","is_free":"0","datetime":"1540454477","price":"2180"},
+        {"id":"7","course":"WEB前端开发工程师就业班-直播/录播+就业辅导-第3期【JS++前端】","classes":"700","teacher":"JS++名师团","img":"jiuyeban.jpg","is_free":"0","datetime":"1540454477","price":"4980"}]
+    </div>
+    <script type="text/html" id="tpl">
+       <div>{{course}}</div>
+    </script>
+    <script src="../../js/tools.js"></script>
+    <script>
+        ; (function () {
+            var Tar = function () {
+                this.oTab = document.querySelector('.tab');
+                this.oItem = document.querySelectorAll('.tab .item');
+                this.oContainer = document.querySelector('.container');
+                // 获取JSON数据
+                this.data = JSON.parse(document.getElementById('data').innerHTML);
+                // 默认filed为all
+                this.filed = 'all';
+                // 获取模板
+                this.tabTpl = document.querySelector('#tpl').innerHTML;
+            }
+            Tar.prototype = {
+                // 初始化函数
+                init: function () {
+                    this.render(this.choseData(this.filed));
+                    this.bindEvent();
+                },
+
+                // 绑定事件
+                bindEvent: function () {
+                    this.oTab.addEventListener('click', this.tabClick.bind(this), false);
+                },
+
+                // 渲染页面
+                render: function (data) {
+                    // 首先循环进来的data，将this指向改为模板
+                    var list = ''
+                    data.jForEach(function(item, index){
+                        list += this.replace(/{{(.*?)}}/g, function(node, key){
+                            return {
+                                course: item.course
+                            }[key];
+                        })
+                    }, this.tabTpl);
+                    this.oContainer.innerHTML = list;
+                },
+
+                tabClick: function (e) {
+                    var e = e || window.event,
+                        tar = e.target || e.srcElement,
+                        tarName = tar.tagName.toLowerCase();
+
+                    // 判断点击的是否是a标签
+                    if (tarName === 'a') {
+                        // 选项卡切换
+                        // a的父级是item
+                        var parent = tar.parentNode;
+                        // 排他
+                        this.oItem.forEach((function (item, index) {
+                            item.classList.remove('cur');
+                        }))
+                        // 设置当前点击的item加上cur
+                        parent.classList.add('cur');
+
+                        // 获取当前的filed，以便做数据筛选
+                        this.filed = parent.dataset.filed;
+                        this.render(this.choseData(this.filed));
+                    }
+                },
+
+                // 筛选数据
+                choseData: function (filed) {
+                    return this.data.jFilter(function (item, index) {
+                        switch (filed) {
+                            case 'all':
+                                return true;
+                                break;
+                            case 'free':
+                                return item.is_free === '1';
+                                break;
+                            case 'no_free':
+                                return item.is_free === '0';
+                                break;
+                            default: {
+                                return true;
+                            }
+                        }
+                    })
+                }
+            }
+            window.Tar = Tar;
+        })();
+        new Tar().init();
+    </script>
+</body>
+
+</html>

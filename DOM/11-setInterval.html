@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 第一种写法
+			setInterval(function(){
+				console.log(1);
+			}, 1000); // 每隔一秒，运行的过程中改变不了时间
+			
+			// 第二种写法
+			setInterval(test, 1000); // test没有括号
+			
+			function test(){
+				console.log(1);
+			}
+			
+			//第三种写法
+			setInterval('test()', 1000); // 字符串要打括号
+			
+			function test(){
+				console.log(1);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// function test(){
+			// 	var i = 0;
+
+			// 	var count = {
+			// 		add: function(){
+			// 			i++;
+			// 			console.log(i);
+			// 		}
+			// 	}
+
+			// 	return count;
+			// }
+			// var num = test();
+
+			// num.add();
+			// num.add();
+			// num.add();
+
+			function test() {
+				var i = 0;
+
+				function add() {
+					console.log(++i);
+				}
+
+				return add;
+			}
+
+			// var num = test();
+			// num();
+			// num();
+			
+			// console.log(test());
+			// test()();
+		</script>
+	</body>
+</html>

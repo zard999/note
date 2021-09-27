@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 请按照字节数排序下列数组 ['我爱你', 'OK', 'Hello', '你说WHAT', '可以']
+			var arr = ['我爱你', 'OK', 'Hello', '你说WHAT', '可以'];
+			
+			arr.sort(function(a, b){
+				return test(a) - test(b);
+				
+			});
+			
+			function test(str){
+				var bytes = str.length;
+				for (var i = 0; i < str.length; i++){
+					if (str.charCodeAt(i) > 255){
+						bytes++;
+					}
+				}
+				
+				return bytes;
+			}
+			console.log(arr);
+		</script>
+	</body>
+</html>

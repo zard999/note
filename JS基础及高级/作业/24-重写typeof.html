@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 封装myTypeof
+			function myTypeof(value) {
+				var type = typeof value;
+				var toStr = Object.prototype.toString;
+				var res = {
+					'[object Array]': 'array',
+					'[object Object]': 'object',
+					'[object String]': 'object string',
+					'[object Number]': 'object number',
+					'[object Boolean]': 'object boolean',
+					'[object Date]': 'object date',
+					'[object RegExp]': 'object regexp'
+				}
+				if (value === null){
+					// 处理null
+					return 'null';
+				}else if(type === 'object'){
+					// 处理object
+					var ret = toStr.call(value);
+					return res[ret];
+				}else{
+					return type;
+				}
+
+			}
+
+			var value = {};
+			var value = [];
+			var value = new String();
+			var value = new Boolean();
+			var value = new Number();
+			var value = new Object();
+			var value = Object;
+			console.log(myTypeof(value));
+			// 不是对象返回：undefined,boolean, number, string, null, function
+
+			//  对象的时候返回：   object-number,  object-boolean    object-string, object-array, object
+			// [object Number],[object Boolean], [object String],[object Array],[object Object]
+		</script>
+	</body>
+</html>

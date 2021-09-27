@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// var obj = {
+			// 	name: '123',
+			// 	name: '123'
+			// } 用判断对象中是不是有这个属性
+			// 去除重复项
+			var arr = [0, 0, 1, 2, 1, 4, 2, 5, 6, 7, 8, 'a', 'a', 'b'];
+
+			Array.prototype.unique = function() {
+				// 写方法
+				// 用类数组去重
+				var temp = {},
+					newArr = [];
+
+				for (var i = 0; i < this.length; i++) {
+					// 判断是不是自己的属性
+					// !temp[this[i]] 这种写法排除不了0 因为 this[0] = 0 -> !temp[0] -> true 
+					// 如果非要这么写 -> 那么下面的  temp[this[i]] = 'value'(字符串或者非0的数即可)
+					if (!temp.hasOwnProperty(this[i])) {
+						// temp[0] = 0;
+						temp[this[i]] = this[i];
+						newArr.push(this[i]);
+					}
+					// newArr = Array.prototype.slice.call(temp[this[i]])
+				}
+
+				return newArr;
+				// delete Object.prototype.splice;
+				// console.log(obj);
+			}
+
+			console.log(arr.unique());;
+
+			// 字符串去重
+			var str = '11112321314354526246372589axcbsdhxzbeh';
+					
+			String.prototype.unique = function() {
+				var temp = {},
+					newStr = '';
+
+				for (var i = 0; i < this.length; i++) {
+					if (!temp.hasOwnProperty(this[i])) {
+						temp[this[i]] = this[i];
+						newStr += temp[this[i]];
+					}
+				}
+
+				return newStr;
+			}
+			
+			console.log(str.unique());
+		</script>
+	</body>
+</html>

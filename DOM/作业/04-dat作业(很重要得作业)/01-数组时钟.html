@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1></h1>
+		<script type="text/javascript">
+			// 在原型上编程，写一个数组时针
+			var h1 = document.getElementsByTagName('h1')[0];
+
+			setInterval(function(){
+				h1.innerHTML = new Date().getDateTime();
+			}, 1000);
+
+			Date.prototype.getDateTime = function() {
+				var year = this.getFullYear(),
+					month = this.getMonth() + 1,
+					day = this.getDay(),
+					hours = this.getHours(),
+					minutes = this.getMinutes(),
+					seconds = this.getSeconds();
+
+				function setZero(num) {
+					if (num < 10) {
+						num = '0' + num;
+					}
+					return num
+				}
+
+				return year + '-' + setZero(month) + '-' + setZero(day) + ' ' + setZero(hours) + ':' + setZero(minutes) +
+					':' + setZero(seconds);
+
+				h1.innerHTML = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+			}
+
+
+
+			h1.innerHTML = new Date().getDateTime();
+		</script>
+	</body>
+</html>

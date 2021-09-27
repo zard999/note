@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var name = 'zhangyonghui';
+			name += 10;
+			var type = typeof(name);  // string
+			if (type.length === 6){ // true
+				type.text = 'haha'; // new String(type).text = 'haha'
+									// delete type.text;
+			}
+			console.log(type.text); //undefined
+			// undefined
+			// 如果想成功输出，给type new String就行
+		</script>
+	</body>
+</html>

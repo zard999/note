@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>
+			已进行<span>0</span>秒
+		</h1>
+		
+		<script type="text/javascript">
+			var oH1 = document.getElementsByTagName('h1')[0],
+				oSpan = oH1.getElementsByTagName('span')[0],
+				sec = 0;
+				
+				setInterval(function(){
+					oSpan.innerHTML = ++sec;
+				}, 1000)
+		</script>
+	</body>
+</html>

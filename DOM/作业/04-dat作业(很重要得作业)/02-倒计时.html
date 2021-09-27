@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1></h1>
+		<script type="text/javascript">
+			// 在原型上编程，写一个倒计时，位数不为两位的补0
+			var oH1 = document.getElementsByTagName('h1')[0],
+				endTime = new Date('2021-9-1 0:0:0').getTime(),
+				t = null;
+
+			t = setInterval(function() {
+				oH1.innerHTML = new Date().countDown(endTime, t);
+			})
+
+			Date.prototype.countDown = function(endTime, clearTime) {
+				var nowTime = this.getTime(),
+					leftTime = (endTime - nowTime) / 1000,
+					d, h, m, s;
+
+				if (leftTime >= 0) {
+					d = Math.floor(leftTime / 60 / 60 / 24);
+					h = Math.floor(leftTime / 60 / 60 % 24);
+					m = Math.floor(leftTime / 60 % 60);
+					s = Math.floor(leftTime % 60);
+				} else {
+					clearInterval(clearTime);
+				}
+
+				if (h < 10) {
+					h = '0' + h;
+				}
+				if (m < 10) {
+					m = '0' + m;
+				}
+				if (s < 10) {
+					s = '0' + s;
+				}
+
+				return d + '天' + h + '小时' + m + '分钟' + s + '秒';
+			}
+		</script>
+	</body>
+</html>

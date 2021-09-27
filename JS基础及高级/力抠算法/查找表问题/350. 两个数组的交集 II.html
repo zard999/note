@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			let nums1 = [1, 2, 2, 1],
+				nums2 = [2, 2];
+				
+			var initComput = function(nums1, nums2){
+				// 首先将两个数组分别用键值对形式装在Map中
+				let map1 = makeCountMap(nums1);
+				let map2 = makeCountMap(nums2);
+				// 创建一个数组用来装并集
+				let res = [];
+				
+				// 任意遍历一个map中的键名
+				for (let num of map1.keys()){
+					// 分别找到是否在map上
+					const count1 = map1.get(num);
+					const count2 = map2.get(num);
+					// 因为遍历的是map1，所以这里判断count2即可
+					if(count2){
+						const countPlus = Math.min(count1, count2);
+						for (var i = 0; i < countPlus; i++){
+							res.push(num);
+						}
+					}
+				}
+				
+				return res;
+			}
+
+			function makeCountMap(nums){
+				let map = new Map();
+				
+				nums.forEach(function(item, index){
+					// 首先获取item是否在map中
+					let count = map.get(item);
+					if (count){
+						map.set(item, count + 1);
+					}else{
+						// 不在则键设置为item，值设置为1
+						map.set(item, 1)
+					}
+				})
+				
+				return map;
+			}
+		</script>
+	</body>
+</html>

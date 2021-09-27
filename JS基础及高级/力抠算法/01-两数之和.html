@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// var twoSum = function(nums, target) {
+			//     let hash = [];
+			// 	for(let i = 0; i < nums.length; i++){
+			// 		if (hash[target - nums[i]] !== undefined){
+			// 			return [hash[target - nums[i]], i];
+			// 		}
+			// 		hash[nums[i]] = i;
+			// 	}
+			// 	return [];
+			// };
+
+
+			var twoSum = function(nums, target) {
+				const map = new Map();
+				for (let i = 0; i < nums.length; i++) {
+					const complement = target - nums[i];
+					if (map.has(complement)) {
+						return [map.get(complement), i];
+					} else {
+						map.set(nums[i], i);
+					}
+				}
+				return [];
+			}
+			console.log(twoSum([2,7,11,15,18,32], 47));
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

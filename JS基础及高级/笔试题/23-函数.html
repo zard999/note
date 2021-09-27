@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 95% 专业知识 考不倒你 => 前端技术的专业人才
+
+			// Function
+
+			// const test = new Function('a', 'b', 'c', 'console.log(a + b + c)');
+			// const test = new Function('a, b, c', 'console.log(a + b + c)');
+			// test(1, 2, 3);
+
+			var a = 1,
+				b = 2;
+
+			function test() {
+				var b = 3;
+
+				return new Function('c', 'console.log(a + b + c)'); // 不会闭包，只会拿自己的作用域或者全局的
+			}
+
+			var t = test();
+
+			t(4);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		=== 1. 原因:因为null和undefined有且只有一个值,所以可以用全等进行判断,只有数据类型相等才可以判断是null或undefiend,
+		instanceof: 1. 只能判断对象类型的具体类型,
+		2. A instanceof B : 检测B的原型对象是否在A的原型链上,
+		constructor: 1. 构造器属性, 可以得到当前数据的构造器,
+		2. 可以和对应的构造函数进行比较和判断
+		Object.prototype.toString.call(o).toLowerCase().slice(8, -1);
+		Object.prototype.toString.call(o).toLowerCase().slice(8, -1);
+	</script>
+</body>
+</html>	

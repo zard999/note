@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			document.onclick = function(e) {
+				var e = e || window.event;
+				
+				console.log(e.pageY, pagePos(e).top);
+			}
+
+			function pagePos(e) {
+				var sLeft = getScrollOffset().left,
+					sTop = getScrollOffset().top,
+					// 获取文档偏移的，但是有可能他不存在，IE8以上不存在
+					cLeft = document.documentElement.offsetX || 0,
+					cTop = document.documentElement.offsetY || 0;
+
+				return {
+					left: e.clientX + sLeft - cLeft,
+					top: e.clientY + sTop - cTop
+				}
+			}
+
+			// 获取滚动条滚动的距离
+			function getScrollOffset() {
+				if (window.pageXOffset) {
+					return {
+						left: window.pageXOffset,
+						top: window.pageYOffset
+					}
+				} else {
+					return {
+						X: document.body.scrollLeft + document.documentElement.scrollLeft,
+						Y: document.body.scrollTop + document.documentElement.scrollTop
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

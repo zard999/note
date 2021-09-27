@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = "http://www.baidu.com?user=laoli&pass=123&score=100",
+            newArr = str.split("?")[1].split("&"),
+            len = newArr.length,
+            item,
+            obj = {};
+
+        for (var i = 0; i < len; i++) {
+            item = newArr[i];
+            var newStr = item.split("=");
+            obj[newStr[0]] = newStr[1];
+        }
+
+        console.log(obj);
+    </script>
+</body>
+
+</html>

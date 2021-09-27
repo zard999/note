@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Student(obj) {
+            // 公有属性：设置给实例化对象的属性
+            this.name = obj.name;
+            this.age = obj.age;
+            this.sex = obj.sex;
+            // 特权方法：设置给实例化对象的方法
+            this.say = function(){
+
+            }
+            // 私有属性：在构造函数中设置给构造函数的属性
+            var b = 10;
+            // 私有方法：在构造函数中设置给构造函数的方法
+            function fn() {
+
+            }
+        }
+
+        Student.prototype = {
+            // 公有方法：设置给实例化对选哪个的方法
+            fn() {
+
+            }
+        }
+        // 静态属性：设置给构造函数的属性
+        Student.address = '武汉';
+    </script>
+</body>
+
+</html>

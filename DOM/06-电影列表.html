@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<ul id="list">
+			<!-- h2: name   p : area -->
+		</ul>
+
+		<script type="text/javascript">
+			var list = document.getElementById('list'),
+				item,
+				data = [{
+						"name": "天下无贼",
+						"area": "中国"
+					},
+					{
+						"name": "复仇者联盟",
+						"area": "美国"
+					},
+					{
+						"name": "咒怨",
+						"area": "日本"
+					}
+				];
+
+			for (var i = 0; i < data.length; i++) {
+				item = data[i];
+				// 第一种
+				// var li = document.createElement('li'),
+				// 	h2 = document.createElement('h2'),
+				// 	p = document.createElement('p');
+				// h2.innerHTML = '电影名称：' + data[key].name;
+				// p.innerHTML = '地区：' + data[key].area;
+				// list.appendChild(li);
+				// li.appendChild(h2);
+				// li.appendChild(p);
+				
+				// 第二种(虽然性能比较好，但太麻烦了)
+				list.innerHTML += '<li>' + 
+									'<h3>电影名称：' + item.name + '</h3>' +
+									'<p>地区：' + item.area + '</p>' +
+								'</li>';
+			}
+		</script>
+	</body>
+</html>

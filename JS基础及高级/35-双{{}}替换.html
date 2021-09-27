@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var str = 'My name is {{name}}. I\'m {{age}} years old',
+				reg = /{{(.*?)}}/g;
+			
+			var str2 = str.replace(reg, function(node, key){
+				// console.log(node, key);
+				return {
+					name: 'Jone',
+					age: 32
+				}[key];
+				// var obj = {
+				// 	name: 'Jone',
+				// 	age: 32
+				// }
+				// return obj[key];
+			})
+		</script>
+	</body>
+</html>

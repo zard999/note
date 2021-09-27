@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1"></div>
+    <script>
+        function ElemDrag(id) {
+            // 通过获取实参的id获取元素
+            this.elemDomId = document.getElementById(id)
+        }
+
+        ElemDrag.prototype = {
+            // 执行函数
+            init() {
+                // 创建that存储this
+                var that = this;
+                that.elemDomId.onmousedown = function (e) {
+                    // 执行down函数
+                    that.down(e);
+                }
+            },
+            // 鼠标按下执行函数
+            down(e) {
+                var that = this;
+                // 取消鼠标默认事件
+                e.preventDefault();
+                // 封装鼠标距离当前元素的距离，也就是鼠标在当前元素的宽度和高度
+                that.clientStart = {
+                    // 宽度
+                    x: e.pageX - that.getStyle(that.elemDomId, 'left'),
+                    // 高度
+                    y: e.pageY - that.getStyle(that.elemDomId, 'top')
+                }
+                // 给document绑定鼠标移动事件
+                document.onmousemove = function (e) {
+                    // 取消鼠标默认事件
+                    e.preventDefault();
+                    // 执行move函数
+                    that.move(e);
+                }
+
+                // 给document绑定鼠标抬起事件
+                document.onmouseup = function () {
+                    // 执行up函数
+                    that.up();
+                }
+            },
+            // 鼠标移动执行函数
+            move(e) {
+                var that = this;
+                // 封装当前元素跟着移动的left和top值
+                that.clientEnd = {
+                    x: e.pageX - that.clientStart.x,
+                    y: e.pageY - that.clientStart.y
+                }
+                // 鼠标移动实时改变当前元素的left和top值
+                that.elemDomId.style.left = that.clientEnd.x + 'px';
+                that.elemDomId.style.top = that.clientEnd.y + 'px';
+
+                // 执行限制边界函数
+                that.boundary();
+
+            },
+            // 鼠标抬起函数
+            up: function () {
+                // 移除move和up事件
+                document.onmousemove = null;
+                document.onmouseup = null;
+            },
+            // 限制边界函数
+            boundary() {
+                var that = this;
+                // 设置边界
+                // 如果left值小于0，那么让元素的left值等于0
+                if (that.clientEnd.x < 0) {
+                    that.elemDomId.style.left = 0;
+                }
+
+                // 如果top值小于0，那么让元素的top值等于0
+                if (that.clientEnd.y < 0) {
+                    that.elemDomId.style.top = 0;
+                }
+
+                // 封装当前元素在页面中最大的left和top
+                that.elemMost = {
+                    x: window.innerWidth - that.getStyle(that.elemDomId, 'width'),
+                    y: window.innerHeight - that.getStyle(that.elemDomId, 'height')
+                }
+
+                // 如果left值大于最大的left，那么让元素的left值最大的left
+                if (that.clientEnd.x > that.elemMost.x) {
+                    that.elemDomId.style.left = that.elemMost.x + 'px';
+                }
+
+                // 如果left值大于最大的top，那么让元素的top值最大的top
+                if (that.clientEnd.y > that.elemMost.y) {
+                    this.elemDomId.style.top = that.elemMost.y + 'px';
+                }
+            },
+            // 封装一个获取元素style属性上的方法
+            getStyle(elem, prop) {
+                if (window.getComputedStyle) {
+                    if (prop) {
+                        return parseInt(window.getComputedStyle(elem, null)[prop]);
+                    } else {
+                        return window.getComputedStyle(elem, null);
+                    }
+                }
+            }
+        }
+        // 实例化执行
+        new ElemDrag('box1').init();
+    </script>
+</body>
+
+</html>

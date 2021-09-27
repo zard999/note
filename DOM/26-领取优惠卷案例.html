@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.btn{
+				border: none;
+				width: 200px;
+				height: 50px;
+				background-color: red;
+				color: #fff;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<button class="btn">领取优惠卷</button>
+		<script type="text/javascript">
+			var oBtn = document.getElementsByClassName('btn')[0];
+			
+			// 第一种写法
+			// oBtn.addEventListener('click', test, false);
+			// function test(){
+			// 	this.innerHTML = '已领取';
+			// 	this.style.backgroundColor = '#ddd';
+			// 	this.removeEventListener('click', test, false);
+			// }
+			
+			// 第二种写法(非严格模式最好的办法)
+			oBtn.addEventListener('click', function(){
+				this.innerHTML = '已领取';
+				this.style.backgroundColor = '#ddd';
+				this.removeEventListener('click', arguments.callee,false)
+			}, false);
+		</script>
+	</body>
+</html>

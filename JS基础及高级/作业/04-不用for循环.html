@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.onload = function() {
+				/* 
+				 * 1.定义一个函数，从wp接收一个饮料的名称，函数返回对应的价格
+				 * 2.定义一个函数，从wp接收一个数，接收一个运算符号(+ - * / %),并返回运算结果
+				 * 3.定义一个函数，从wp接收一个n，算出n的阶乘，不能用for循环
+				 * 4.定义一个函数，从wp接收一个n，算出斐波拉契数列的第N位，不能用for循环
+				 */
+
+				// var p = String(window.prompt('请输入饮料的名字：'));
+				// document.write(price(p));
+
+				// var number1 = parseInt(window.prompt('请输入一个数'));
+				// var number2 = parseInt(window.prompt('请再次输入一个数'));
+				// var fh = window.prompt('请输入您要的运算');
+				// count(number1, number2, fh);
+				
+				// var n = parseInt(window.prompt("请输入一个n："));
+				// document.write(`n的阶乘为：${factorial(n)}`);
+				
+				var n = parseInt(window.prompt("请输入一个n："));
+				
+				document.write(fblq(n));
+				
+				function fblq(n){
+					if (n <= 2){
+						return 1;
+					}
+					
+					return fblq(n-1) + fblq(n-2);
+				}
+				
+				function factorial(n){
+					if (n === 1){
+						return 1;
+					}
+					
+					return n*factorial(n-1);
+				}
+
+				function count(a, b, c) {
+					switch (c) {
+						case '+':
+							document.write(`a ${c} b = ${a+b}`);
+							break;
+						case '-':
+							document.write(`a ${c} b = ${a-b}`);
+							break;
+						case '*':
+							document.write(`a ${c} b = ${a*b}`);
+							break;
+						case '/':
+							document.write(`a ${c} b = ${a/b}`);
+							break;
+						case '%':
+							document.write(`a ${c} b = ${a%b}`);
+							break;
+					}
+				}
+
+				function price(a) {
+					switch (a) {
+						case '可乐':
+							return `${a}的价格3元`;
+							break;
+
+						case '雪碧':
+							return `${a}的价格3元`;
+							break;
+
+						case '红牛':
+							return `${a}的价格6元`;
+							break;
+
+						case '阿萨姆':
+							return `${a}的价格4元`;
+							break;
+
+						default:
+							return '没有这种饮料';
+
+					}
+
+				}
+			}
+		</script>
+	</body>
+</html>

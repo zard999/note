@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p>5秒跳转百度...</p>
+		<button>取消</button>
+		<script type="text/javascript">
+			var oP = document.getElementsByTagName('p')[0],
+				oBtn = document.getElementsByTagName('button')[0];
+				
+				t = setInterval(function(){
+					location.href = 'http://www.baidu.com';
+				}, 5000);
+				
+				oBtn.onclick = function(){
+					clearTimeout(t);
+					console.log('停止跳转');
+				}
+		</script>
+	</body>
+</html>

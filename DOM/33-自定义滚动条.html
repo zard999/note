@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style type="text/css">
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.father {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 10px;
+				height: 100%;
+				background-color: orange;
+			}
+
+			.father .son {
+				position: absolute;
+				width: 10px;
+				top: 0;
+				background-color: #bfa;
+			}
+
+			.content {
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="content"></div>
+		<div class="father">
+			<div class="son"></div>
+		</div>
+		<script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var son = document.getElementsByClassName('son')[0],
+				content = document.getElementsByClassName('content')[0],
+				y;
+
+			content.innerHTML = '';
+
+			for (var i = 0; i < 200; i++) {
+				content.innerHTML += i + '<br>';
+			}
+
+			sonHeight = window.innerHeight / content.clientHeight * window.innerHeight;
+
+			son.style.height = sonHeight + 'px';
+
+			addEvent(son, 'mousedown', function(e) {
+				var e = e || window.event;
+
+				y = e.clientY - getStyle(son, 'top');
+
+				addEvent(document, 'mousemove', mouseMove);
+				addEvent(document, 'mouseup', mouseUp);
+			})
+
+			function mouseMove(e) {
+				var e = e || window.event,
+					Y = e.clientY - y,
+					contentScrollTop;
+					
+				if (Y < 0) {
+					Y = 0;
+				} else if (Y > window.innerHeight - getStyle(son, 'height')) {
+					Y = window.innerHeight - getStyle(son, 'height');
+				}
+				contentScrollTop = Y / (sonHeight / window.innerHeight);
+				son.style.top = Y + 'px';
+				content.style.top = -contentScrollTop + 'px';
+				preventEvent(e);
+			}
+
+			function mouseUp(e) {
+				var e = e || window.event;
+
+				removeEvent(document, 'mousemove', mouseMove);
+				removeEvent(document, 'mouseup', mouseUp);
+				preventEvent(e);
+				canceBubble(e);
+			}
+		</script>
+	</body>
+</html>

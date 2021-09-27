@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function fn(c){
+				/* 
+				 * AO: {
+				 * 		c: undefined -> true(arguments[0]) -> false
+				 * 		a: undefined -> function (){}
+				 * 		b: undefined -> function b(){} -> function (){}
+				 * 		d: undefined
+				 * }
+				 */		
+			    console.log(c);  // true
+			    var c = false;
+			    console.log(a);  // function a()
+			    var a = 1;
+			    console.log(a);  // 1
+			    function a(){
+			        
+			    };
+			    console.log(a);  // 1
+			    b();          // 函数声明   
+			    var b = function(){
+			        console.log("函数表达式");
+			    }
+			    function b(){    
+			        console.log( "函数声明" )
+			    }
+			    b();       // 函数表达式      
+			    var d = 4;
+			}
+			fn(true);
+		</script>
+	</body>
+</html>

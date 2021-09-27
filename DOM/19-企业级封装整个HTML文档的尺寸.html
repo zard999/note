@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function getScrollSize(){
+				if (document.body.scrollHeight){
+					return {
+						width: document.body.scrollWidth,
+						height: document.body.scrollHeight
+					}
+				}else{
+					return {
+						width: document.documentElement.scrollWidth,
+						height: document.documentElement.scrollHeight
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

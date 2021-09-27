@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// var attendance = {
+			// 	students: []
+			// 	,total: 6
+			// 	,join: function(name){
+			// 		this.students.push(name);
+			// 		if(this.students.length === this.total){
+			// 			console.log(name + '到课，学生已到齐');
+			// 		}else{
+			// 			console.log(name + '到课，学生未到齐');
+			// 		}
+			// 	}
+			// 	,leave: function(name){
+			// 		var ind = this.students.indexOf(name);
+			// 		this.students.splice(ind, 1);
+			// 		console.log(name + '早退');
+			// 		console.log(this.students);
+			// 	}
+			// }
+
+			// attendance.join('张三');
+			// attendance.join('张四');
+			// attendance.join('张五');
+			// attendance.join('张六');
+			// attendance.join('张七');
+			// attendance.join('张八');
+			// attendance.leave('张八');
+
+			function Attendance(opt) {
+				this.students = opt.students;
+				this.total = opt.total;
+				this.join = function(name) {
+					this.students.push(name);
+					if (this.total === this.students.length) {
+						console.log(name + '到课，学生已到齐');
+					} else {
+						console.log(name + '到课，学生未到齐');
+					}
+				};
+				this.leave = function(name) {
+					var idx = this.students.indexOf(name);
+					if (idx !== -1) {
+						this.students.splice(idx, 1);
+					}
+					console.log(name + '早退');
+					console.log(this.students);
+				}
+
+			}
+
+			var attendance = new Attendance({
+				students: [],
+				total: 6
+			});
+
+			attendance.join('张三');
+			attendance.join('张四');
+			attendance.join('张五');
+			attendance.join('张六');
+			attendance.join('张七');
+			attendance.join('张八');
+			attendance.leave('张八');
+		</script>
+	</body>
+</html>

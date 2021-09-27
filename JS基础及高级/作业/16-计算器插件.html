@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 写一个插件，任意传两个数字，调用插件内部方法可进行加减乘除功能
+			
+			;(function(){
+				var Compute = function(){
+					// this.x = opt.firstNum || 0;  // 这里掉了个 || 0
+					// this.y = opt.secondNum || 0;
+				}
+				
+				Compute.prototype = {
+					plus: function(a, b){
+						return a + b;
+					},
+					minus: function(){
+						return a - b;
+					},
+					mul: function(){
+						return a * b;
+					},
+					div: function(){
+						return a / b;
+					},
+					qy: function(){
+						return a % b;
+					},
+				}
+				
+				window.Compute = Compute;
+			})();
+			
+			var compute = new Compute();
+			
+			var res = compute.plus(1, 2);
+			console.log(res);
+			
+		</script>
+	</body>
+</html>

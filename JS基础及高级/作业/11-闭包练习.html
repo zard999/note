@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 缓存器，一个班级(写成函数)，学生名字保存在一个数组里(函数里)，两个方法写在函数中的一个对象中，
+			// 第一个方法是加入班级，第二个方法是离开班级，每次加入或离开，
+			// 每次执行这两个方法，传入相应的参数，需要传入学生的名字，打印新的学生名单
+
+			function classStudent() {
+				var students = [];
+
+				function setFf() {
+					var classFf = {
+						join: function(name) {
+							students.push(name);
+							console.log(students);
+						},
+						remove: function(name) {
+							// for (var i = 0; i<name.length; i++){
+							// 	var item = students[i]; // 优化for循环的方法
+
+							// 	if (item === name){
+							// 		students.splice(i, 1);
+							// 	}
+							// }
+							var idx = students.indexOf(name);
+							if (idx !== -1) {
+								students.splice(idx, 1);
+							}
+							console.log(students);
+						}
+					}
+
+					return classFf;
+				}
+
+				return setFf;
+			}
+
+			var setFf = classStudent();
+			var classFf = setFf();
+
+			classFf.join('张永辉');
+			classFf.join('韩博文');
+			classFf.join('陈洪锋');
+			classFf.remove('陈洪锋');
+		</script>
+	</body>
+</html>

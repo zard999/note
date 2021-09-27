@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				height: 5000px;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function getScrollOffset() {
+				if (window.pageXOffset) {
+					return {
+						left: window.pageXOffset,
+						top: window.pageYOffset
+					}
+				} else {
+					return {
+						left: document.body.scrollLeft + document.documentElement.scrollLeft,
+						top: document.body.scrollTop + document.documentElement.scrollTop
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

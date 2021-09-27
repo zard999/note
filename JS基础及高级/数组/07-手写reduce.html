@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			Array.prototype.jReduce = function(fn, initialVal){
+				var arr = this,
+					len = arr.length,
+					arg2 = arguments[2] || window;
+				for (var i = 0; i < len; i++){
+					initialVal = fn.apply(arg2, [initialVal, arr[i], i, arr]);
+				}
+				
+				return initialVal;
+			}
+		</script>
+	</body>
+</html>

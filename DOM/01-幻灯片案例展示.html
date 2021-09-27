@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				margin: 0;
+			}
+
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.slider-wrap {
+				width: 996px;
+				height: 480px;
+				margin: 50px auto;
+				border: 1px solid #000;
+			}
+
+			.slider {
+				float: left;
+				position: relative;
+				width: 853px;
+				height: 480px;
+			}
+
+			.slider .slider-item {
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 853px;
+				height: 480px;
+			}
+
+			.slider .slider-item.active {
+				display: block;
+			}
+
+			.thumbs {
+				float: left;
+				width: 142px;
+				height: 480px;
+			}
+
+			.thumbs-item {
+				height: 80px;
+				opacity: .5;
+			}
+
+			.thumbs .thumbs-item.cur {
+				opacity: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="slider-wrap">
+			<div class="slider">
+				<ul class="slider-list">
+					<li class="slider-item active">
+						<a href="">
+							<img src="img/01/itemlike01.png">
+						</a>
+					</li>
+					<li class="slider-item">
+						<a href="">
+							<img src="img/01/itemlike02.png">
+						</a>
+					</li>
+					<li class="slider-item">
+						<a href="">
+							<img src="img/01/itemlike03.png">
+						</a>
+					</li>
+					<li class="slider-item">
+						<a href="">
+							<img src="img/01/itemlike04.png">
+						</a>
+					</li>
+					<li class="slider-item">
+						<a href="">
+							<img src="img/01/itemlike05.png">
+						</a>
+					</li>
+					<li class="slider-item">
+						<a href="">
+							<img src="img/01/itemlike06.png">
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="thumbs">
+				<ul class="thumbs">
+					<li class="thumbs-item cur">
+						<a href="javascript:;">
+							<img src="img/01/itemlike01.png">
+						</a>
+					</li>
+					<li class="thumbs-item">
+						<a href="javascript:;">
+							<img src="img/01/itemlike02.png">
+						</a>
+					</li>
+					<li class="thumbs-item">
+						<a href="javascript:;">
+							<img src="img/01/itemlike03.png">
+						</a>
+					</li>
+					<li class="thumbs-item">
+						<a href="javascript:;">
+							<img src="img/01/itemlike04.png">
+						</a>
+					</li>
+					<li class="thumbs-item">
+						<a href="javascript:;">
+							<img src="img/01/itemlike05.png">
+						</a>
+					</li>
+					<li class="thumbs-item">
+						<a href="javascript:;">
+							<img src="img/01/itemlike06.png">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="./js/01/fun.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// var sliderItem = document.getElementsByClassName('slider-item');
+			// var thumbsItem = document.getElementsByClassName('thumbs-item');
+			// for (var i = 0; i < thumbsItem.length; i++) {
+			// 	(function(k) {
+			// 		thumbsItem[k].onclick = function() {
+			// 			for (var j = 0; j < thumbsItem.length; j++) {
+			// 				thumbsItem[j].className = 'thumbs-item';
+			// 				sliderItem[j].className = 'slider-item';
+			// 			}
+			// 			sliderItem[k].className += ' active';
+			// 			this.className += ' cur';
+			// 		}
+			// 	})(i);
+			// 	// 每次都要立即执行，这样i才能保存下来
+			// }
+			
+			// 插件写法
+			var slider = new Slider({
+				sliderItem: 'slider-item',
+				thumbsItem: 'thumbs-item'
+			});
+		</script>
+	</body>
+</html>

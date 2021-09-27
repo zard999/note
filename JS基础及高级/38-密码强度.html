@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text">
+		<button type="button">点击</button>
+		<script type="text/javascript">
+			// 至少六位，包含1个大写 1个小写 1个数字 1个特殊
+			// 做这种题一定要想到正向预查(多个包含)
+			var oInp = document.getElementsByTagName('input')[0],
+				oBtn = document.getElementsByTagName('button')[0];
+			
+			oBtn.onclick = test;
+			
+			function test() {
+				var reg = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[~!@#$%^&*?]).*$/;
+				var flag = reg.test(oInp.value);
+				console.log(flag);
+			}
+		</script>
+	</body>
+</html>

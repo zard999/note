@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body,
+			html {
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+			}
+
+			a {
+				text-decoration: none;
+				color: #fff;
+			}
+
+			.bd {
+				position: relative;
+				width: 520px;
+				height: 280px;
+				margin: 50px auto;
+				/* overflow: hidden; */
+			}
+
+			.img-wrap {
+				position: absolute;
+				left: -520px;
+				height: 280px;
+			}
+
+			.img-wrap a {
+				float: left;
+				width: 520px;
+				height: 280px;
+			}
+
+			.img-wrap a img {
+				width: 100%;
+				height: 100%;
+			}
+
+
+
+			.btn a {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				display: inline-block;
+				font-size: 30px;
+				width: 30px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				background-color: gray;
+			}
+
+			.btn .prev {
+				left: 0px;
+
+			}
+
+			.btn .next {
+				right: 0px;
+			}
+
+			.dot-wrap {
+				position: absolute;
+				bottom: 10px;
+			}
+
+			.dot-wrap .dot {
+				float: left;
+				width: 15px;
+				height: 15px;
+				background-color: red;
+				margin: 0 10px;
+				opacity: .5;
+				filter: opacity(opaccity=50);
+			}
+
+			.dot.active {
+				background-color: #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bd">
+			<div class="img-wrap">
+				<a href="javascript:;" class="img-a"><img
+						src="https://img.alicdn.com/tfs/TB1wOidVWL7gK0jSZFBXXXZZpXa-520-280.jpg"></a>
+				<a href="javascript:;" class="img-a"><img
+						src="https://img.alicdn.com/tfs/TB1FjZ7VWL7gK0jSZFBXXXZZpXa-520-280.png"></a>
+				<a href="javascript:;" class="img-a"><img
+						src="https://img.alicdn.com/imgextra/i4/6000000005291/O1CN01mr9XQt1oxKHmEckLQ_!!6000000005291-0-octopus.jpg"></a>
+				<a href="javascript:;" class="img-a"><img
+						src="https://gtms03.alicdn.com/tps/i3/TB1gXd1JXXXXXapXpXXvKyzTVXX-520-280.jpg"></a>
+				<a href="javascript:;" class="img-a"><img
+						src="https://gtms01.alicdn.com/tps/i1/TB1r4h8JXXXXXXoXXXXvKyzTVXX-520-280.jpg"></a>
+				<a href="javascript:;" class="img-a"><img
+						src="https://img.alicdn.com/tfs/TB1wOidVWL7gK0jSZFBXXXZZpXa-520-280.jpg"></a>
+				<a href="javascript:;" class="img-a"><img
+						src="https://img.alicdn.com/tfs/TB1FjZ7VWL7gK0jSZFBXXXZZpXa-520-280.png"></a>
+			</div>
+			<div class="btn">
+				<a href="javascript:;" class="prev"><</a>
+						<a href="javascript:;" class="next">></a>
+			</div>
+			<div class="dot-wrap">
+				<a href="javascript:;" class="dot active"></a>
+				<a href="javascript:;" class="dot"></a>
+				<a href="javascript:;" class="dot"></a>
+				<a href="javascript:;" class="dot"></a>
+				<a href="javascript:;" class="dot"></a>
+			</div>
+		</div>
+
+		<script src="../../js/utils.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var imgWrap = document.getElementsByClassName('img-wrap')[0],
+				imgA = document.getElementsByClassName('img-a'),
+				dotWrap = document.getElementsByClassName('dot-wrap')[0],
+				prev = document.getElementsByClassName('prev')[0],
+				next = document.getElementsByClassName('next')[0],
+				imgWidth = getStyle(imgA[0], 'width'),
+				imgLen = imgA.length,
+				dotLen = imgLen - 2,
+				index = 1;
+
+			imgWrap.style.width = imgWidth * imgLen + 'px';
+			dotWrap.style.left = (imgWidth - getStyle(dotWrap, 'width')) / 2 + 'px';
+			
+			prev.addEventListener('click', function(){
+				
+			})
+			
+			next.addEventListener('click', function(){
+				index++;
+				move(imgWrap, 'left', imgWidth * (-index), 10, function(){
+					console.log(index);
+					console.log(getStyle(imgWrap, 'left'));
+					if (getStyle(imgWrap, 'left') < -2600){
+						imgWrap.style.left = -520 + 'px';
+						console.log();
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

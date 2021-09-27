@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function addEvent(el, type, fn){
+				if (el.addEventListener){
+					el.addEventListener(type, fn, false);
+				}else if (el.attachEvent){
+					el.attachEvent('on' + type, function(){
+						fn.call(el);
+					});
+				}else{
+					el['on' + type] = fn;
+				}
+			}
+		</script>
+	</body>
+</html>

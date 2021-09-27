@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var arr = ['a', 'b', 'c', 'd'];
+			
+			function splice(arr, index){
+				
+				if (index >= 0){
+					index += index;
+				}else{
+					index += arr.length;
+				}
+				
+				return index;
+			}
+			
+			console.log(arr[splice(arr, -2)]);
+		</script>
+	</body>
+</html>

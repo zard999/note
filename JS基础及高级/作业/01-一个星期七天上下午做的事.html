@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.onload = function() {
+				var weekDay = prompt("请填写星期几");
+				var dayOnly = prompt("请填写上午或者下午");
+				document.write(`今天${weekDay},`)
+
+				switch (weekDay) {
+					case "星期一":
+						if (dayOnly == "上午") {
+							document.write("上午写HTML网页");
+						} else if (dayOnly == "下午") {
+							document.write("下午写CSS样式");
+						}
+						break;
+					case "星期二":
+						if (dayOnly == "上午") {
+							document.write("上午背面试题");
+						} else if (dayOnly == "下午") {
+							document.write("下午听音乐");
+						}
+						break;
+						
+					case '星期三':
+						if (dayOnly == "上午") {
+							document.write("上午逛淘宝");
+						} else{
+							document.write("下午逛京东");
+						}
+						break;
+						
+					case '星期四':
+						if (dayOnly == "上午") {
+							document.write("上午看视频");
+						} else{
+							document.write("下午写JS");
+						}
+						break;
+						
+					case '星期五':
+						if (dayOnly == "上午") {
+							document.write("上午打篮球");
+						} else{
+							document.write("下午打羽毛球");
+						}
+						break;
+						
+					case '星期六':
+						if (dayOnly == "上午") {
+							document.write("上午看1988");
+						} else{
+							document.write("下午危机边缘");
+						}
+						break;
+						
+					case '星期日':
+						if (dayOnly == "上午") {
+							document.write("上午逛淘宝");
+						} else{
+							document.write("下午逛京东");
+						}
+						break;
+				}
+			}
+		</script>
+	</body>
+</html>

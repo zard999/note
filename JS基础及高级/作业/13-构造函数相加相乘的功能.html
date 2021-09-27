@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/* 
+			 * 写一个构造函数，接收数字类型的参数，
+			 * 参数数量不定，完成参数相加和相乘的功能
+			 */
+			function Compute() {
+				var res;
+				// 第一种：将实参放在new Compute中
+				// this.plus = function(){
+				// 	res = 0;
+				// 	loop('add', res);
+				// };
+
+				// this.times = function(){
+				// 	res = 1;
+				// 	loop('mul', res);
+				// }
+
+				// function loop(method, res){
+				// 	for (var i = 0; i < args.length; i++){
+				// 		var item = args[i];
+
+				// 		if(method === 'add'){
+				// 			res += item;
+				// 		}else if(method === 'mul'){
+				// 			res *= item;
+				// 		}
+				// 	}
+				// 	console.log(res);
+				// }
+
+				// 第二种，将实参放在方法中
+				this.plus = function() {
+					res = 0;
+					loop(arguments, 'add', res);
+				}
+				this.times = function() {
+					res = 1;
+					loop(arguments, 'mul', res);
+				}
+
+				function loop(arguments, method, res) {
+					for (var i = 0; i < arguments.length; i++) {
+						var item = arguments[i];
+
+						if (method === 'add') {
+							res += item;
+						} else if (method === 'mul') {
+							res *= item;
+						} else if (method === 'sub'){
+							res -= item;
+						} else if (method === 'cep'){
+							res /= item;
+						}
+					}
+					console.log(res);
+				}
+			}
+			// var compute = new Compute(2, 3, 5, 7);
+			// compute.plus();
+			// compute.times();
+			var compute = new Compute();
+			compute.plus(2, 3, 6);
+			compute.times(3, 4, 10);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function myNew(obj) {
+            // 先创建一个对象用来当返回值
+            var o = {};
+            // 让argument变成数组并截取到第二个参数，也就是对象
+            var arg = Array.from(arguments).slice(1);
+            // 改变this指向对象o并执行obj函数，用result装返回值
+            var result = obj.apply(o, arg);
+            // 让对象o的隐式原型指向obj函数的显示原型
+            o.__proto__ = obj.prototype;
+            // 判断返回值是不是对象
+            if (typeof result === 'object' && result !== null || typeof result === 'function'){
+                return result;
+            }
+            // 否则返回对象o
+            return o;
+        }
+
+        function Student(obj) {
+            this.name = obj.name;
+            this.age = obj.age;
+            this.sex = obj.sex;
+        }
+
+        // 随意给Student显示原型上创建一个方法
+        Student.prototype.say = function(){
+            
+        }
+
+        // 实例化s1
+        var s1 = new Student({
+            name: '张三',
+            age: 19,
+            sex: '男'
+        });
+
+        // 执行myNew函数，将返回值给s2
+        var s2 = myNew(Student, {
+            name: '张三',
+            age: 19,
+            sex: '男'
+        });
+        console.log(s1);
+        console.log(s2);
+    </script>
+</body>
+
+</html>

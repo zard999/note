@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// call/apply都是更改this的指向
+			// apply用的多一些
+			function Car(brand, color){
+				this.brand = brand;
+				this.color = color;
+				this.run = function(){
+					console.log('running');
+				}
+			}
+			
+			var newCar = {
+				displacement: '3.0'
+			};
+			// Car.call(newCar, 'Benz', 'red');
+			Car.apply(newCar, ['Benz', 'red']);
+								// arguments
+			console.log(newCar);
+		</script>
+	</body>
+</html>

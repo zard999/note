@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			Professor.prototype.tSkill = 'Java';
+			function Professor(){}
+			
+			var professor = new Professor();
+			
+			Teacher.prototype = professor;
+			function Teacher(){
+				this.mSkill = 'JS/JQ';
+				this.success = {
+					num: 100
+				}
+				this.number = 100;
+			}
+			
+			var teacher = new Teacher();
+			
+			Student.prototype = teacher;
+			function Student(){
+				this.pSkill = 'HTML/CSS';
+			}
+			var student = new Student();
+			
+			student.number++;
+			console.log(student, teacher);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 请用window.prompt接受用户输入的年份，判断是否是闰年(三目运算符)
+			var year = parseInt(window.prompt('请输入年份：'));
+
+			function inLeapYear(year) {
+				return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0 ? `${year}是闰年`
+																			  : `${year}不是闰年`;
+			}
+		</script>
+	</body>
+</html>

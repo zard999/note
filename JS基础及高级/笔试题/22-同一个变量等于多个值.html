@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a = {
+				_default: 0,
+				toString: function(){
+					return ++this._default;
+				}
+			}
+			if (a == 1 && a == 2 & a == 3){
+				console.log('You\'are win ! ! ! !');
+			}
+			
+			
+			// getter -> 访问一个变量的时候进行拦截
+			var bValue = 0;
+			
+			Object.defineProperty(window, 'b', {
+				get () {
+					return ++bValue;
+				}
+			})
+			
+			// 每次get的时候 -> 调用 ++bValue === 1
+			
+			if (b === 1 && b === 2 & b === 3){
+				console.log('You\'are win ! ! ! !');
+			}
+		</script>
+	</body>
+</html>

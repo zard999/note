@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//用js创建这个结构
+			var oDiv = document.createElement('div');
+
+			// oDiv.setAttribute('id', 'box');
+			oDiv.id = 'box';
+
+			Element.prototype.test = function(n) {
+				var oUl = document.createElement('ul'),
+					oFrag = document.createDocumentFragment();
+					oUl.className = 'list';
+					
+					for (var i = 0; i < n; i++){
+						var oLi = document.createElement('li');
+						oLi.className = 'list-item';
+						oLi.innerHTML = i + '、这是第' + i + '个项目';
+						oFrag.appendChild(oLi);
+					}
+					
+					oUl.appendChild(oFrag);
+					this.appendChild(oUl);
+					
+					return this;
+			}
+			
+			var newDiv = oDiv.test(10);
+			
+			document.body.appendChild(newDiv);
+		</script>
+	</body>
+</html>

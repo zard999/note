@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function toUpperCase(str){
+            return str.toUpperCase();
+        }
+
+        function exclaim(str){
+            return str + '!';
+        }
+
+        function compose(f, g){
+            return function(x){
+                return f(g(x)); // 左倾
+            }
+        }
+
+        function compose1(){
+            var args = Array.from(arguments),
+                len = args.length - 1;
+            return function(x){
+                var res = args[len](x);
+
+                while(len--){  // while太low了
+                    res = args[len](res);
+                }
+                return res;
+            }
+        }
+
+        function compose2(){
+            var args = Array.from(arguments);
+            return function(x){
+                return args.reduceRight(function(res, cb){
+                    return cb(res);
+                }, x);
+            }
+        }
+
+        // var f = compose(exclaim, toUpperCase);
+        // console.log(f('hello'));
+        console.log(compose1(exclaim, toUpperCase)('hello'));
+        console.log(compose2(exclaim, toUpperCase)('hello'));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 这个相不相等？为什么？请给出解决办法
+			
+			console.log({} == {}); // false 
+			
+			var obj = {};
+			obj1 = obj;
+			console.log(obj == obj1);
+			
+			/* 
+			 * 1.false
+			 * 2.因为引用之之间是地址比较，两个对象身处两个不同的存储空间，所以不相等
+			 * 3.新建一个对象，把对象赋给另一个变量，这时候这两个对象就是相等的了,因为他们指向同一个地址
+			 */
+		</script>
+	</body>
+</html>

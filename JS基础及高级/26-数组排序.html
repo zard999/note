@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 要想正常的排序得再()里面写function(a,b)，
+			// 1、必须要有两个形参。
+			// 2、返回值：
+			// 		负值(a就排在前面)，
+			// 		正值(b就排在前面)，
+			// 		0(保持不动)
+			
+			var arr = [27, -43, -75, 7, 1293, 134, 87, 34];
+			arr.sort(function(a, b){
+				// if (a > b){
+				// 	return 1;
+				// }else {
+				// 	return -1;
+				// }
+				return a - b; // 从小到大
+				return b - a; // 从大到小
+				// a - b如果是正值 b移到前面
+				// a - b如果是负值 a移到前面
+			});
+			
+			console.log(arr);
+		</script>
+	</body>
+</html>

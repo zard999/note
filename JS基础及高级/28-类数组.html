@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var obj = {
+				'0': 1,
+				'1': 2,
+				'2': 3,
+				'name': '张三', 
+				
+				'length': 3,
+				// 'splice': Array.prototype.splice, // 这个会将{}变成[]
+				// 'push': Array.prototype.push // 这个会让对象能使用Array的push方法
+			}
+			// Object.prototype.push = Array.prototype.push;
+			// Object.prototype.splice = Array.prototype.splice;
+			var objArr = Array.prototype.slice.call(obj);
+			console.log(objArr);
+			// obj.push(7);
+			
+			// for (var key in obj){
+			// 	if(obj.hasOwnProperty(key)){
+			// 		console.log(obj[key]);
+			// 	}
+			// }
+			
+			// Object.prototype.splice = null
+			// console.log(obj);
+
+			// Array.prototype.push() = function(elem) {
+			// 	this[this.length] = elem;
+			// 	this.length++;
+			// }
+		</script>
+	</body>
+</html>

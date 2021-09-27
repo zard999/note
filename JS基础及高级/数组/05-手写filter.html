@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			var data = [{
+					id: 1,
+					name: '张三'
+				},
+				{
+					id: 2,
+					name: '李四'
+				},
+				{
+					id: 3,
+					name: '王五'
+				},
+				{
+					id: 4,
+					name: '陈六'
+				},
+				{
+					id: 5,
+					name: '程七'
+				},
+				{
+					id: 6,
+					name: '饶八'
+				},
+				{
+					id: 7,
+					name: '黄九'
+				}
+			];
+			// 手写filter，解决BUG
+			Array.prototype.myFilter = function(fn) {
+				var arr = this,
+					len = arr.length,
+					arg = arguments[1] || window,
+					newArr = [],
+					nItem;
+					
+				for (var i = 0; i < len; i++){
+					nItem = deepClone(arr[i]);
+					fn.apply(arg, [nItem, i, arr]) ? newArr.push(nItem) : '';
+				}
+				return newArr;
+			}
+
+			// 加数据源data改变是filter的BUG
+			// var newData = data.filter(function(item, index, array) {
+			// 	item.name = this.name + item.name;
+			// 	return item.id > 3;
+			// }, {
+			// 	name: '【哈哈】'
+			// });
+
+			var newData = data.myFilter(function(item, index){
+				item.name = this.name + item.name;
+				return item.id > 3;
+			},{name: '【haha 】'})
+			console.log(newData);
+			console.log(data);
+
+			function deepClone(origin) {
+				if (checkType(origin) === 'object') {
+					var target = {};
+				} else if (checkType(origin) === 'array') {
+					var target = [];
+				} else {
+					return origin;
+				}
+				for (var key in origin) {
+					if (origin.hasOwnProperty(key)) {
+						target[key] = deepClone(origin[key]);
+					}
+				}
+				return target;
+			}
+
+			function checkType(obj) {
+				return Object.prototype.toString.call(obj).toLowerCase().slice(8, -1);
+			}
+		</script>
+	</body>
+</html>

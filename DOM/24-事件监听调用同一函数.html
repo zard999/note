@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button type="button">点我</button>
+		<script type="text/javascript">
+			var oBtn = document.getElementsByTagName('button')[0];
+			
+			oBtn.addEventListener('click', test);
+			
+			oBtn.addEventListener('click', test);
+			
+			function test(){
+				console.log(1);
+			}
+			
+			// 打印一个1
+			
+			oBtn.attachEvent('onclick', test);
+			
+			oBtn.attachEvent('onclick', test);
+			
+			// 打印两个1
+		</script>
+	</body>
+</html>

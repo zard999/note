@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<p>我是段落标签</p>
+			<a href="#">我是超链接</a>
+			<span>我是span标签</span>
+			<ul>我是ul标签</ul>
+			<e>我是e标签</>
+		</div>
+		<script type="text/javascript">
+			// 作业2 原型上编程 寻找兄弟元素节点 参数为正，找之后的第N个，
+			// 参数为负，找之前得第N个
+			var div = document.getElementsByTagName('div')[0],
+				a = div.getElementsByTagName('a')[0];
+
+			Element.prototype.elemSibling = function(n) {
+				var elem = this;
+
+				// 第一种写法
+				// if (n > 0){
+				// 	while(n){
+				// 		elem = elem.nextElementSibling;
+				// 		n--;
+				// 	}
+				// }else if(n < 0){
+				// 	while(n){
+				// 		elem = elem.previousElementSibling;
+				// 		n++;
+				// 	}
+				// }
+
+				// 第二种写法
+				// 外层写while，里面写if要好一些(是能解决问题，但是兼容性不好)
+				// while(n){
+				// 	if (n > 0){
+				// 		elem = elem.nextElementSibling;
+				// 		n--;
+				// 	}else if (n < 0){
+				// 		elem = elem.previousElementSibling;
+				// 		n++;
+				// 	}
+				// }
+
+				// 第三种写法，解决兼容性问题
+				// while (n) {
+				// 	if (n > 0) {
+				// 		if (elem.nextElementSibling) {
+				// 			elem = elem.nextElementSibling;
+				// 		} else {
+				// 			// elem = elem.nextSibling; //容易把文本节点和注释节点弄出来
+				// 			for (elem = elem.nextSibling; elem && elem.nodeType !== 1; elem = elem.nextSibling);
+				// 		}
+				// 		n--;
+				// 	}else if(n < 0){
+				// 		if (elem.previousElementSibling) {
+				// 			elem = elem.previousElementSibling;
+				// 		}else{
+				// 			for (elem = elem.previousSibling; elem && elem.nodeType !== 1; elem = elem.previousSibling);
+				// 		}
+				// 	}
+				// }
+				
+				// 第四种，不用nextElementSibling(本来兼容性就不好),这也是最推荐的方法
+				while(n){
+					if (n > 0){
+						elem = elem.nextSibling;
+						while(elem && elem.nodeType !== 1){
+							elem = elem.nextSibling;
+						}
+						n--;
+					}else if (n < 0){
+						elem = elem.previousSibling;
+						while(elem && elem.nodeType !== 1){
+							elem = elem.previouSibling;
+						}
+						n++;
+					}
+				}
+
+				return elem;
+			}
+
+			var result = a.elemSibling(4);
+			console.log(result);
+		</script>
+	</body>
+</html>

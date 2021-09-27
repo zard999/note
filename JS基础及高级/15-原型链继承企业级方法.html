@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			
+			function Teacher(){
+				this.name = 'Mr. Li';
+				this.tSkill = 'JAVA';
+			}
+			
+			Teacher.prototype = {
+				pSkill: 'JS/Jq'
+			}
+			
+			var t = new Teacher();
+			console.log(t);	
+			
+			// 下面的buffer操作称为圣杯模式
+			// 缓冲构造函数(中间加了一层缓冲隔离区)
+			function Buffer(){}
+			Buffer.prototype = Teacher.prototype;
+			var buffer = new Buffer();
+			// var buffer = Object.create(Teacher.prototype); //也可以这样写
+			
+			function Student(){
+				this.name = 'Mr. Wang';
+			}
+			// Student.prototype = Teacher.prototype; //不能这样写，Student的原型改变Teacher的原型也会改变
+			Student.prototype = buffer;
+			Student.prototype.age = 18;
+			var s = new Student();
+			console.log(s);
+			
+		</script>
+	</body>
+</html>

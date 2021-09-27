@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .video-warp {
+            position: relative;
+            width: 800px;
+            height: 400px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .video-warp .video {
+            width: 100%;
+            height: 100%;
+            background-color: #bfa;
+        }
+
+        .barrage div {
+            position: absolute;
+            left: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 外部容器 -->
+    <div class="wrap">
+        <!-- 视频容器 -->
+        <div class="video-warp">
+            <!-- 弹幕区 -->
+            <div class="barrage">
+
+            </div>
+            <!-- 视频区 -->
+            <div class="video">
+
+            </div>
+        </div>
+        <form action="#">
+            <input type="text" id="inp">
+            <button id="btn">发布</button>
+        </form>
+    </div>
+    <script>
+        /* 
+         * time: 控制移动时间
+         * speed: 控制移动速度
+         */
+        // 弹幕构造函数
+        function Barrage(obj) {
+            this.btn = document.getElementById(obj.btn);
+            this.inp = document.getElementById(obj.inp);
+            this.bar = document.getElementsByClassName(obj.bar)[0];
+            this.time = obj.time;
+            this.speed = obj.speed;
+        }
+        // 设置弹幕原型对象
+        Barrage.prototype = {
+            init() {
+                // 将this保存到that
+                var that = this;
+                that.btn.onclick = that.throttle(that.center, 2000);
+            },
+            // 核心代码块
+            center() {
+                var that = this;
+                // 创建一个一个弹幕块
+                that.createBarrage();
+                // 随机字体大小
+                that.oDiv.style.fontSize = that.randomSize() + 'px';
+                // 随机颜色
+                that.oDiv.style.color = that.randomColor();
+                // 随机位置
+                that.oDiv.style.top = that.randomLocation() + 'px';
+                // 从右到左移动，最后消失
+                that.move();
+            },
+            // 创建div的方法
+            createBarrage() {
+                var that = this;
+                that.oDiv = document.createElement('div');
+                that.oDiv.textContent = that.inp.value;
+                that.bar.appendChild(that.oDiv);
+            },
+            // 随机大小 12-40
+            randomSize() {
+                return this.random(12, 40);
+            },
+            // 随机颜色的方法
+            randomColor() {
+                var r = this.random(0, 256),
+                    g = this.random(0, 256),
+                    b = this.random(0, 256);
+                return 'rgb(' + r + ',' + g + ',' + b + ')';
+            },
+            // 随机位置的方法
+            randomLocation() {
+                return this.random(0, 360);
+            },
+            // 弹幕移动的方法
+            move() {
+                var that = this;
+                clearInterval(that.timer);
+                // 将输入的速度改为负值
+                if (that.speed > 0) {
+                    that.speed = -that.speed;
+                }
+                // 定时器控制move
+                that.timer = setInterval(function () {
+                    that.oDiv.style.left = that.getStyle(that.oDiv, 'left') + that.speed + 'px';
+                    // 如果left<100清除定时器，移除div
+                    console.log(that.getStyle(that.oDiv, 'left'));
+                    if (that.getStyle(that.oDiv, 'left') < -100) {
+                        clearInterval(that.timer);
+                        that.oDiv.remove();
+                    }
+                }, that.time);
+                console.log(that.timer);
+            },
+            // 创建随机数的方法
+            random(a, b) {
+                return Math.floor(Math.random() * (b - a) + a);
+            },
+            // 封装节流
+            throttle(fn, time) {
+                var lastTime = 0,
+                    that = this;
+                return function (e) {
+                    var nowTime = Date.now();
+                    if (nowTime - lastTime < time) {
+                        return;
+                    }
+                    lastTime = nowTime;
+                    fn.call(that, e);
+                }
+            },
+            // 封装一个获取元素style属性上的方法
+            getStyle(elem, prop) {
+                if (window.getComputedStyle) {
+                    if (prop) {
+                        return parseInt(window.getComputedStyle(elem, null)[prop]);
+                    } else {
+                        return window.getComputedStyle(elem, null);
+                    }
+                }
+            }
+        }
+        new Barrage({
+            btn: 'btn',
+            inp: 'inp',
+            bar: 'barrage',
+            time: 20,
+            speed: 10
+        }).init();
+    </script>
+</body>
+
+</html>

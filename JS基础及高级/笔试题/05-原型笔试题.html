@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Car() {
+				this.brand = 'Benz';
+			}
+
+			Car.prototype = {
+				brand: 'Mazda',
+				intro: function() {
+					console.log(`我是${this.brand}车`);
+					// this指向对象本身
+				}
+			}
+			
+			var car = new Car();
+			car.intro(); // 打印Benz
+			Car.prototype.intro(); // 打印Mazda
+			
+		</script>
+	</body>
+</html>

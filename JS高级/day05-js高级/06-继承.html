@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        inherit(Teacher, Student);
+        var s1 = new Student();
+        var t1 = new Teacher();
+        console.log(s1);
+        console.log(t1);
+
+
+        // 封装一个函数用来继承原型链
+        function inherit(origin, target) {
+            // 创建一个中间函数，相当于中间加了一层缓冲隔离区
+            function Buffer() { }
+            // 让Buffer函数的显示原型等于origin
+            Buffer.prototype = origin.prototype;
+            // 目标函数的显示原型等于中间缓冲区的实例化对象
+            target.prototype = new Buffer();
+            // 改变constructor指向为目标函数
+            target.prototype.constructor = target;
+            // 自定义一个类来表示上一级原型链的构造函数
+            target.prototype.supper_class = origin;
+        }
+
+        function Student() { }
+
+        function Teacher() { }
+    </script>
+</body>
+
+</html>

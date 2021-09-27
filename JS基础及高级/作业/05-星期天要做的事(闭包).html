@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.onload = function() {
+				function sunDay() {
+					var sunDayThing = '';
+
+					var sunThing = {
+						setThing: function(thing) {
+							sunDayThing = thing;
+						},
+						showThing: function() {
+							console.log(`The Day on afternoor is ${sunDayThing}`);
+						}
+					}
+
+					return sunThing;
+				}
+
+				var sunDay = sunDay();
+
+				sunDay.setThing('play computer game');
+				sunDay.setThing('Walking');
+				sunDay.setThing('Running');
+				sunDay.showThing();
+
+			}
+		</script>
+	</body>
+</html>

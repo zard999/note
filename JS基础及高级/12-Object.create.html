@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// Object.create(对象(原型对象)或者null) // 创建对象
+			var test = {
+				num: 2
+			}
+			function Obj(){}
+			Obj.prototype.num = 1;
+			var obj1 = Object.create(Obj.prototype);
+			var obj2 = Object.create(test);
+			// create的作用：
+			// 
+			var obj3 = new Obj();
+			// new的作用：
+			// 实例化boj3
+			// 调用构造函数Obj的初始化属性和发给发
+			// 指定实例对象的原型
+			
+			// 两个方法都一样 create提供了自定义原型的功能
+		</script>
+	</body>
+</html>

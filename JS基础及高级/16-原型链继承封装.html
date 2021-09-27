@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			// function inherit(Target, Origin){
+			// 	function Buffer(){}
+			// 	// Buffer.prototype = Origin.prototype;
+			// 	Buffer.prototype = Orgin.prototype;
+			// 	// new Buffer必须放在下面
+			// 	Target.prototype = new Buffer();
+			// 	// Target(Student)的构造器应该指向本身
+			// 	Target.prototype.constructor = Target;
+			// 	// 继承源 super是保留字不能用(随意起名)
+			// 	Target.prototype.super_class = Origin;
+			// }
+			
+			// 闭包
+			// function test(){
+			// 	var Buffer = function(){}
+			// 	function inherit(Target, Origin){
+			// 		Buffer.prototype = Origin.prototype;
+			// 		Target.prototype = new Buffer();
+			// 		Target.prototype.constructor = Target;
+			// 		Target.prototype.super_class = Orgin;
+			// 	}
+			// 	return inherit;
+			// }
+			
+			// 立即执行函数(雅虎的封装方法)(模块化开发)
+			var inherit = (function(){
+				var Buffer = function(){}
+				return function (Target, Origin){
+					Buffer.prototype = Origin.prototype;
+					Target.prototype = new Buffer();
+					Target.prototype.constructor = Target;
+					Target.prototype.super_class = Origin;
+				}
+			})();
+			
+			
+			// Teacher,prototype.name = 'Mr. Zhang';
+			// Student.prototype = Teacher.prototype;
+			function Teacher(){}
+			function Student(){}
+			inherit(Student, Teacher);
+			var s = new Student();
+			var t = new Teacher();
+			
+			console.log(s);
+			console.log(t);
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.box {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+			}
+
+			.box.b2 {
+				width: 200px;
+				height: 200px;
+				background-color: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<button class="btn">我是一个按钮</button>
+		<div class="box">
+
+		</div>
+		<script type="text/javascript">
+			var box = document.getElementsByClassName('box')[0],
+				btn = document.getElementsByClassName('btn')[0];
+
+			btn.addEventListener('click', function() {
+				// addClass(box, 'b2');
+
+				// hasClass(box, 'b2');
+
+				// removeClass(box, 'b2');
+
+				toggleClass(box, 'b2');
+			})
+			
+			/*
+			 * 定义一个函数，专门用来为一个元素添加class属性值
+			 * 参数
+			 * 	obj 要添加class属性的元素
+			 * 	cn 要添加的class的值
+			 * 	
+			 */
+			function addClass(obj, cn) {
+
+				//判断obj中是否含有cn这个class
+				if (!hasClass(obj, cn)) {
+					obj.className += " " + cn;
+				}
+
+			}
+
+			/*
+			 * 判断一个对象中是否含有指定的class属性
+			 * 	参数：
+			 * 		obj：要检查的对象
+			 * 		cn：要检查class值
+			 * 如果对象中具有该class则返回true，否则返回false
+			 */
+			function hasClass(obj, cn) {
+
+				//检查obj中是否与b2这个class
+				//var reg = /\bb2\b/;
+				var reg = new RegExp("\\b" + cn + "\\b");
+
+				return reg.test(obj.className);
+
+			}
+
+			/*
+			 * 删除一个元素中的class
+			 */
+			function removeClass(obj, cn) {
+
+				//创建一个正则表达式
+				var reg = new RegExp("\\b" + cn + "\\b");
+
+				//将class属性中符合正则表达式的内容，替换为空串
+				obj.className = obj.className.replace(reg, "");
+
+			}
+
+			/*
+			 * 切换一个元素的class属性值
+			 * 	如果有，则删除
+			 * 	如果没有，则添加
+			 */
+			function toggleClass(obj, cn) {
+				//判断obj中是否有cn
+				if (hasClass(obj, cn)) {
+					//如果有，则删除
+					removeClass(obj, cn);
+				} else {
+					//如果没有，则添加
+					addClass(obj, cn);
+				}
+			}
+		</script>
+	</body>
+</html>

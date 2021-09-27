@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			Object.prototype.num = 1;
+			var person1 = {
+				name: '张三',
+				age: 34,
+				chidren: {
+					first: {
+						name: '张小一',
+						age: 14
+					},
+					second: {
+						name: '张小二',
+						age: 8
+					},
+					thrid: {
+						name: '张小三',
+						age: 3
+					}
+				},
+				car: ['Benz', 'Mazrd']
+			}
+
+			var person2 = deepClone(person1);
+
+			person2.chidren.forth = {
+				name: '张小四',
+				age: 19
+			}
+
+			console.log(person1);
+			console.log(person2);
+
+			// 深拷贝
+			function deepClone(origin, target) {
+				var target = target || {},
+					str = Object.prototype.toString,
+					arrObj = '[object Array]';
+				for (var key in origin) {
+					// 先判断是否是原型上的值 不在原型上返回true
+					if (origin.hasOwnProperty(key)) {
+						// 判断是不是对象
+						if (typeof(origin[key]) === 'object' && origin[key] !== null) {
+							// 在判断是数组还是对象
+							if (str.call[origin[key]] === arrObj) {
+								// 是数组
+								target[key] = [];
+							} else {
+								target[key] = {};
+							}
+							// 递归
+							deepClone(origin[key], target[key]);
+						} else {
+							target[key] = origin[key];
+						}
+					}
+				}
+				return target;
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+	</head>
+	<body>
+		<form action="" method="">
+			<label>你爱好的运动是？</label>
+			<input type="checkbox" name="" id="checkedAll" value="" />全选/全不选<br>
+			<input type="checkbox" name="items" value="足球" />足球
+			<input type="checkbox" name="items" value="篮球" />篮球
+			<input type="checkbox" name="items" value="羽毛球" />羽毛球
+			<input type="checkbox" name="items" value="兵乓球" />兵乓球<br>
+			<input type="button" name="" id="checkedAllBox" value="全 选" />
+			<input type="button" name="" id="checkedNoBox" value="全不选" />
+			<input type="button" name="" id="checkedRevBox" value="反 选" />
+			<input type="button" name="" id="sendBtn" value="提 交" />
+		</form>
+
+		<script type="text/javascript">
+			var checkedAllBox = document.getElementById('checkedAllBox'),
+				checkedNoBox = document.getElementById('checkedNoBox'),
+				checkedRevBox = document.getElementById('checkedRevBox'),
+				sendBtn = document.getElementById('sendBtn'),
+				items = document.getElementsByName('items'),
+				checkedAll = document.getElementById('checkedAll'),
+				len = items.length,
+				item,
+				flag = 0;
+
+			checkedAllBox.addEventListener('click', function() {
+				for (var i = 0; i < len; i++) {
+					item = items[i];
+					item.checked = true;
+					checkedAll.checked = true;
+				}
+			})
+
+			checkedNoBox.addEventListener('click', function() {
+				for (var i = 0; i < len; i++) {
+					item = items[i];
+					item.checked = false;
+					checkedAll.checked = false;
+				}
+			})
+
+
+			checkedRevBox.addEventListener('click', function() {
+				checkedAll.checked = true;
+				for (var i = 0; i < len; i++) {
+					item = items[i];
+					item.checked = !item.checked;
+
+					if (!item.checked) {
+						checkedAll.checked = false;
+					}
+				}
+			})
+
+			sendBtn.addEventListener('click', function() {
+				for (var i = 0; i < len; i++) {
+					item = items[i];
+					if (item.checked) {
+						alert(item.value);
+					}
+				}
+			})
+
+			checkedAll.addEventListener('click', function() {
+				for (var i = 0; i < len; i++) {
+					item = items[i];
+
+					item.checked = checkedAll.checked;
+				}
+			})
+
+			for (var i = 0; i < len; i++) {
+				item = items[i];
+				item.addEventListener('click', function() {
+					checkedAll.checked = true;
+					for (var j = 0; j < len; j++) {
+						if (!items[j].checked) {
+							checkedAll.checked = false;
+						}
+					}
+				})
+			}
+		</script>
+	</body>
+</html>

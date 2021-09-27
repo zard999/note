@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<p>我是段落标签</p>
+			<a href="#">我是超链接</a>
+			<span>我是span标签</span>
+		</div>
+		<script type="text/javascript">
+			// 作业5 原型上封装insertAfter方法 
+			// 提醒(找到后一个兄弟元素然后插在前面，最后一个需要判断)
+			var oDiv = document.getElementsByTagName('div')[0],
+				oA = oDiv.getElementsByTagName('a')[0],
+				oSpan = oDiv.getElementsByTagName('span')[0],
+				oP = oDiv.getElementsByTagName('p')[0],
+				oUl = document.createElement('ul');
+			oUl.innerHTML = '123';
+
+			Element.prototype.insertAfter = function(target, ofterNode) {
+				var nextNode = ofterNode.nextElementSibling;
+
+				if (nextNode) {
+					this.insertBefore(target, nextNode);
+				} else {
+					this.appendChild(target);
+				}
+			}
+
+			oDiv.insertAfter(oUl, oSpan);
+		</script>
+	</body>
+</html>

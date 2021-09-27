@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<a href="">我是超链接</a>
+			<p>我是段落标签</p>
+			<span>我是span标签</span>
+		</div>
+		<script type="text/javascript">
+			// 在原型上编程,找出一个元素的第N层父级元素
+			var div = document.getElementsByTagName('div')[0];
+
+			Element.prototype.elemParent = function(n) {
+				var elem = this,
+					// value = n,
+					type = typeof(n);
+
+				if (type === 'undefined' || type !== 'number') {
+					return elem.parentNode;
+				} else if (n < 0) {
+					return undefined;
+				}
+
+				while (n) {
+					// 没去掉#document
+					// elem = elem.parentNode;
+					// if (elem === null){
+					// 	return [null, value + 1 - n];
+					// }
+					// n--;
+					
+					// 去掉#document
+					if (elem.nodeName === 'HTML') {
+						elem = null;
+						return elem;
+					}
+					elem = elem.parentNode;
+					n--;
+				}
+
+				return elem;
+			}
+			console.log(div.elemParent(3));
+			// var divParentElement = div.test(1);
+		</script>
+	</body>
+</html>

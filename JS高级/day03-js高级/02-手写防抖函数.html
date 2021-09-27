@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="inp">
+    <script>
+        var oInp = document.getElementById('inp');
+
+        oInp.addEventListener('input', debounce(center, 500));
+
+        function center(e) {
+            console.log('核心代码');
+            console.log(this);
+            console.log(e);
+        }
+
+        function debounce(fn, time) {
+            var timer = null;
+            return function (e) {
+                clearTimeout(timer);
+                timer = setTimeout((function () {
+                    fn.call(this, e);
+                }).bind(this), time);
+            }
+        }
+
+        
+    </script>
+</body>
+
+</html>

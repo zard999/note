@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.slider {
+				position: relative;
+				width: 590px;
+				height: 470px;
+			}
+
+			.slider .indicator {
+				position: absolute;
+				left: 46px;
+				bottom: 20px;
+				width: 152px;
+				height: 18px;
+				/* background-color: yellow; */
+			}
+
+			.slider .indicator .indicator-dot {
+				display: block;
+				float: left;
+				position: relative;
+				width: 18px;
+				height: 18px;
+				/* border: 1px solid #000; */
+				box-sizing: border-box;
+			}
+
+			.slider .indicator .indicator-dot::before {
+				content: '';
+				display: block;
+				width: 18px;
+				height: 18px;
+				background-color: #fff;
+				border-radius: 50%;
+				opacity: .1;
+			}
+
+			.slider .indicator .indicator-dot::after {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 4px;
+				left: 4px;
+				width: 6px;
+				height: 6px;
+				border: 2px solid #fff;
+				border-radius: 50%;
+				opacity: .4;
+			}
+
+			.slider .indicator .indicator-dot.active::after {
+				opacity: 1;
+				background-color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="slider">
+			<div class="indicator">
+				<i class="indicator-dot active"></i>
+				<i class="indicator-dot"></i>
+				<i class="indicator-dot"></i>
+				<i class="indicator-dot"></i>
+				<i class="indicator-dot"></i>
+				<i class="indicator-dot"></i>
+				<i class="indicator-dot"></i>
+				<i class="indicator-dot"></i>
+			</div>
+			<img src="../pyg/upload/focus1.png">
+		</div>
+	</body>
+</html>

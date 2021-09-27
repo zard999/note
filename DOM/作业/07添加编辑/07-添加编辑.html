@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			a {
+				text-decoration: none;
+				color: #000;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" id="inp">
+		<input type="button" id="btn" value="增加li">
+		<ul class="list"></ul>
+		<script src="../../js/utils.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// to do list 点击按钮input框里面的内容要消息，点击某一项的编辑，内容放到input，btn变成编辑第几项，点击删除删除
+			var inp = document.getElementById('inp'),
+				btn = document.getElementById('btn'),
+				list = document.getElementsByClassName('list')[0],
+				listItem = list.getElementsByClassName('list-item'),
+				flag = true,
+				index = 0;
+
+			btn.addEventListener('click', function(e) {
+				if (flag) {
+					if (inp.value) {
+						var li = document.createElement('li'),
+							a1 = document.createElement('a'),
+							a2 = document.createElement('a');
+
+						li.className = 'list-item';
+						li.innerText = inp.value + ' ';
+						a1.className = 'edit-li';
+						a1.innerText = '编辑 ';
+						a1.href = 'javascript:;';
+						a2.className = 'remove-li';
+						a2.innerText = '删除';
+						a2.href = 'javascript:;';
+						li.appendChild(a1);
+						li.appendChild(a2);
+						list.appendChild(li);
+						inp.value = '';
+					}
+					listItem = list.getElementsByClassName('list-item');
+				} else {
+					listItem[index].firstChild.nodeValue = inp.value + ' ';
+					edit();
+				}
+			});
+
+			list.addEventListener('click', function(e) {
+				var e = e || window.event,
+					tar = e.target || e.srcElement;
+
+				index = Array.prototype.indexOf.call(listItem, tar.parentNode);
+
+				if (tar.className === 'edit-li') {
+					btn.value = '编辑第' + index + '项';
+					inp.value = tar.parentNode.firstChild.nodeValue;
+					flag = false;
+				} else if (tar.className === 'remove-li') {
+					tar.parentNode.remove();
+					if (btn.value !== '增加li') {
+						edit();
+					}
+				}
+			});
+
+			function edit() {
+				btn.value = '增加li';
+				inp.value = '';
+				flag = true;
+			}
+		</script>
+	</body>
+</html>

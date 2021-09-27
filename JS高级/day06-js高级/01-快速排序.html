@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 封装快排函数
+        function quickSort(arr) {
+            // 用len存取数组长度
+            var len = arr.length;
+            // 判断数组的长度是否小于1，如果小于，则直接返回
+            if (len <= 1) {
+                return arr;
+            }
+            // 从数组中间取一个下标，并移除出去
+            var num = Math.floor(len / 2);
+            // 创建一个变量存储移除出的数
+            var newNum = arr.splice(num, 1);
+            // 创建左右数组
+            var left = [];
+            var right = [];
+
+            // 遍历数组
+            arr.forEach(function (item, index) {
+                // 判断item是否比移除的数大，大的放右边，小的放左边
+                if (item < newNum) {
+                    left.push(item);
+                } else {
+                    right.push(item);
+                }
+            });
+
+            // 拼接数组,并继续递归左右两边的数组
+            var result = quickSort(left).concat(newNum, quickSort(right));
+
+            // 返回拼接后的数组
+            return result;
+        }
+
+        var arr = [1, 234, 43, 534, 5345, 234, 345, 645, 13, 4, 5, 6];
+        console.log(quickSort(arr));
+    </script>
+</body>
+
+</html>

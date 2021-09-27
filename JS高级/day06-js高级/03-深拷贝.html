@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 定义一个对象
+        var person1 = {
+            name: '张三',
+            age: 34,
+            chidren: {
+                first: {
+                    name: '张小一',
+                    age: 14
+                },
+                second: {
+                    name: '张小二',
+                    age: 8
+                },
+                thrid: {
+                    name: '张小三',
+                    age: 3
+                }
+            },
+            car: ['Benz', 'Mazrd']
+        }
+
+        var person2 = deepClone(person1);
+        console.log(person1);
+        console.log(person2);
+
+        // 深拷贝
+        function deepClone(origin) {
+            if (checkType(origin) == 'object') {
+                var target = {};
+            } else if (checkType(origin) === 'array') {
+                var target = [];
+            } else {
+                return origin;
+            }
+            // 遍历源对象
+            for (var key in origin) {
+                // 先判断是否是原型上的值 不在原型上返回true
+                if (origin.hasOwnProperty(key)) {
+                    // 递归调用每一个值
+                    target[key] = deepClone(origin[key]);
+                }
+            }
+            // 将target对象返回出去
+            return target;
+        }
+
+        function checkType(obj) {
+            return Object.prototype.toString.call(obj).toLowerCase().slice(8, -1);
+        }
+    </script>
+</body>
+
+</html>

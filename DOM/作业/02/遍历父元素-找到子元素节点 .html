@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<a href="">我是超链接</a>
+			<p>我是段落标签</p>
+			<span>我是span标签</span>
+		</div>
+		<script type="text/javascript">
+			// 在原型上编程，遍历任意一个父元素 找到他的子元素节点 
+			// 有数字参数 -> 某一个下标对应子元素
+			// 没有数字参数 -> 子元素节点的集合
+			var div = document.getElementsByTagName('div')[0]
+				
+			Element.prototype.elemChildren = function(index){
+			var	childNodes = this.childNodes,
+				len = childNodes.length,
+				item,
+				type = typeof (index),
+				temp = {
+					"length": 0,
+					"push": Array.prototype.push,
+					"slice": Array.prototype.slice
+				};
+				
+				for (var i = 0; i < len; i++){
+					item = childNodes[i];
+					if (item.nodeType === 1){
+						temp.push(item);
+					}
+				}
+				
+				// for (var key in temp){
+				// 	if (index == key){
+				// 		return temp[key];
+				// 	}
+				// }
+				
+				if (index !== undefined && type !== 'number'){
+					return undefined;
+				} // 这句话可以写也可以不写
+				
+				// if (index === undefined){
+				// 	return temp;
+				// }else{
+				// 	return temp[index];
+				// }
+				
+				return index === undefined ? temp : temp[index];
+			}
+			
+			
+			var newDiv = div.elemChildren(2);
+			console.log(newDiv);
+			// HTMLElement.prototype.elementChild = function(num){
+			// 	var num = num || 0;
+			// }
+		</script>
+	</body>
+</html>

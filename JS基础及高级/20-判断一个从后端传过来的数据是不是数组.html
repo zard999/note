@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a = [];
+			var str = Object.prototype.toString,
+				trueTip = [object Array];
+			
+			if (str.call(a) === '[object Array]'){
+				console.log('是数组');
+			}else{
+				console.log('不是数组');
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var str = "abfranhjabbfdbbfebabbebwqbbb";
+
+        var obj = checkStr(str);
+        console.log("出现最多的字符为：" + obj.chars + ",次数为：" + obj.number);
+
+      function checkStr(str) {
+        var temp = {},
+          len = str.length,
+          item,
+          num = 0,
+          s;
+
+        for (var i = 0; i < len; i++) {
+          item = str[i];
+          if (temp[item]) {
+            temp[item] += 1;
+          } else {
+            temp[item] = 1;
+          }
+        }
+
+        for (var k in temp) {
+          if (temp[k] > num) {
+            num = temp[k];
+            s = k;
+          }
+        }
+
+        return {
+          chars: s,
+          number: num,
+        };
+      }
+    </script>
+  </body>
+</html>

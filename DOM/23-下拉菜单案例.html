@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			html,
+			body {
+				margin: 0;
+			}
+
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.drop-down {
+				position: relative;
+				width: 200px;
+			}
+
+			.drop-down::after {
+				position: absolute;
+				top: 22px;
+				right: 15px;
+				content: '';
+				display: table;
+				width: 0;
+				height: 0;
+				border: 10px solid transparent;
+				border-top-color: gray;
+			}
+
+			.drop-down.active::after {
+				top: 10px;
+				border-top-color: transparent;
+				border-bottom-color: gray;
+			}
+
+			.drop-down .main {
+				display: block;
+				line-height: 50px;
+				background-color: #000;
+				color: #fff;
+				text-align: center;
+			}
+
+			.drop-down a {
+				text-decoration: none;
+			}
+
+			.drop-down .list {
+				height: 0;
+				overflow: hidden;
+			}
+
+			.drop-down .item {
+				height: 40px;
+				line-height: 40px;
+				background-color: #333;
+				text-align: center;
+			}
+
+			.drop-down .item:hover {
+				background-color: #000;
+			}
+
+			.drop-down .item a {
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="drop-down">
+			<a href="javascript:;" class="main">下拉菜单</a>
+			<ul class="list">
+				<li class="item"><a href="">第1个项目</a></li>
+				<li class="item"><a href="">第2个项目</a></li>
+				<li class="item"><a href="">第3个项目</a></li>
+				<li class="item"><a href="">第4个项目</a></li>
+				<li class="item"><a href="">第5个项目</a></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var dropDown = document.getElementsByClassName('drop-down')[0],
+				oList = childNode(dropDown)[1],
+				timer = null,
+				listLength = 0,
+				speed = 8;
+
+			dropDown.addEventListener('mouseenter', function() {
+				// JS运动防止抖动的一种方式
+				clearInterval(timer);
+				timer = setInterval(function() {
+					if (listLength >= 200) {
+						clearInterval(timer);
+					} else {
+						listLength = parseInt(getStyle(oList, 'height')) + speed;
+						oList.style.height = listLength + 'px';
+					}
+				}, 1);
+				dropDown.className += ' active';
+			})
+
+			dropDown.addEventListener('mouseleave', function() {
+				clearInterval(timer);
+				timer = setInterval(function() {
+					if (listLength <= 0) {
+						clearInterval(timer);
+					} else {
+						listLength = parseInt(getStyle(oList, 'height')) - speed;
+						oList.style.height = listLength + 'px';
+					}
+				});
+				dropDown.className = 'drop-down';
+			})
+
+			function childNode(node) {
+				var temp = {
+						"lenght": 0,
+						"push": Array.prototype.push,
+						"slice": Array.prototype.slice
+					},
+					children = node.childNodes,
+					len = children.length,
+					item;
+
+				for (var i = 0; i < len; i++) {
+					item = children[i];
+					if (item.nodeType === 1) {
+						temp.push(item);
+					}
+				}
+				return temp;
+			}
+
+
+			function getStyle(elem, prop) {
+				if (window.getComputedStyle) {
+					if (prop) {
+						return window.getComputedStyle(elem, null)[prop];
+					} else {
+						return window.getComputedStyle(elem, bull);
+					}
+				} else {
+					if (prop) {
+						return elem.currentStyle[pror];
+					} else {
+						return elem.currentStyle;
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

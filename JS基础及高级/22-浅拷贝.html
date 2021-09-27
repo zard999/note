@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			Object.prototype.num = 1;
+			var person1 = {
+				name: '张三',
+				age: 34,
+				chidren: {
+					first: {
+						name: '张小一',
+						age: 14
+					}, 
+					second: {
+						name: '张小二',
+						age: 8
+					},
+					thrid: {
+						name: '张小三',
+						age: 3
+					}
+				},
+				car: ['Benz', 'Mazrd']
+			}
+
+			var person2 = test(person1, person2);;
+
+			
+			console.log(person1);
+			console.log(person2);
+			
+			function test(origin, target){
+				var tar = target || {};
+				for (var key in origin) {
+					// key如果不在origin的原型上就返回true
+					if (origin.hasOwnProperty(key)) {
+						tar[key] = origin[key];
+					}
+				}
+				return tar;
+			}
+		</script>
+	</body>
+</html>

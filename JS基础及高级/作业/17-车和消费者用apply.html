@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Car(brand, color, displacement) {
+				this.brand = brand;
+				this.color = color;
+				this.displacement = displacement;
+				this.info = function() {
+					return `排量为${this.displacement}的${this.color}${this.brand}`
+				}
+			}
+
+			function Person(opt) {
+				this.name = opt.name;
+				this.age = opt.age;
+				this.income = opt.income;
+				Car.apply(this, [opt.brand, opt.color, opt.displacement]);
+				this.say = function() {
+					console.log(`年龄${this.age}岁,姓名为${this.name}买了一辆${this.info()}`);
+				}
+
+			}
+
+			var person = new Person({
+				name: '张先生',
+				age: 21.,
+				income: '20k',
+				brand: '马自达',
+				color: '粉色',
+				displacement: '2.0'
+			});
+
+			person.say();
+		</script>
+	</body>
+</html>

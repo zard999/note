@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Person(){
+				/* 
+				 * this = {
+			     *   weight: 129
+				 * }
+				 * this.weight = this.weight - 1;
+				 */
+				this.smoke = function(){
+					this.weight--;
+					console.log(this.weight);
+				}
+			}
+			
+			Person.prototype = {
+				weight: 130
+			}
+			
+			var person = new Person();
+			person.smoke();
+			console.log(Person.prototype.weight);
+		</script>
+	</body>
+</html>

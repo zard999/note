@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 立即执行函数(雅虎的封装方法)(模块化开发)
+			var inherit = (function() {
+				var Buffer = function() {}
+				return function(Target, Orgin) {
+					Buffer.prototype = Orgin.prototype;
+					Target.prototype = new Buffer();
+					Target.prototype.constructor = Target;
+					Target.prototype.super_class = Orgin;
+				}
+			})();
+
+			// 模块化开发
+			var initProgrammer = (function() {
+				var Programmer = function() {}
+				Programmer.prototype = {
+					name: '程序员',
+					tool: '计算机',
+					work: '编写应用程序',
+					duration: '10个小时',
+					say: function() {
+						console.log(`
+								我是一名${this.myName}${this.name},
+								我的工作是用${this.tool},
+								我每天工作${this.work},
+								我的工作需要用到${this.lang.toString()}.`);
+					}
+				}
+
+				function FrontEnd() {}
+
+				function BackEnd() {}
+
+				inherit(FrontEnd, Programmer);
+				inherit(BackEnd, Programmer);
+
+				FrontEnd.prototype.lang = ['HEML', 'CSS', 'JavaScript'];
+				FrontEnd.prototype.myName = '前端';
+				BackEnd.prototype.lang = ['Node', 'Java', 'SQL'];
+				BackEnd.prototype.myName = '后端';
+
+				
+				return [FrontEnd, BackEnd];
+			})();
+
+			var front = new initProgrammer[0]();
+			front.say();
+			var back = new initProgrammer[1]();
+			back.say();
+		</script>
+	</body>
+</html>

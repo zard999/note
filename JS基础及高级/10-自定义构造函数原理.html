@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 自定义构造函数
+			// new的作用是在OA中生成了一个this空对象，将参数都装进去了，最后隐式的return this出来
+			function Car(color, brand){
+				/* 
+				 * this{
+				 * 	color: 'red',
+				 *  brand: 'Benz'
+				 * }
+				 */
+				this.color = color;
+				this.brand = brand;
+				// return this;
+				return {};
+				return [];
+				return function test(){
+					
+				}
+				// 当return出去的是引用值的话，那么实例化后就是return的值
+			}
+			
+			var car1 = new Car('red', 'Benz');
+			console.log(car1.color);
+			
+			function Car2(color, brand){
+				var me ={};
+				
+				me.color = color;
+				me.brand = brand;
+				return me;
+			}
+			
+			var car2 = Car2('red', 'Benz');
+			console.log(car2.color);
+			
+		</script>
+	</body>
+</html>
