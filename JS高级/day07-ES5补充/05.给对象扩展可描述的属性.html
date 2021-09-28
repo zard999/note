@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj1 = Object.create(null);
+
+        Object.defineProperty(obj1, "name", {
+            value: 'xiaozhang',
+            writable: false,
+            enumerable: false,
+            configurable: false
+        })
+
+        Object.defineProperties(obj1, {
+            age: {
+                value: 19,
+                writable: false,
+                enumerable: false,
+                configurable: false
+            },
+
+            sex: {
+                value: '男',
+                writable: false,
+                enumerable: false,
+                configurable: false
+            }
+        })
+    </script>
+</body>
+</html>

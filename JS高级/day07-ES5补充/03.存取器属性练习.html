@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var user = {
+            firstName: "lao",
+            lastName: "li"
+        }
+
+        //存取器属性一般通过可描述的属性添加
+        Object.defineProperty(user, 'fullName', {
+            get() {
+                return this.firstName + ' ' + this.lastName;
+            },
+
+            set(val) {
+                var newArr = val.split(" ");
+                this.firstName = newArr[0];
+                this.lastName = newArr[1];
+            }
+        })
+
+        user.fullName = "xiao wang";
+    </script>
+</body>
+</html>
