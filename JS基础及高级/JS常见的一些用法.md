@@ -274,7 +274,31 @@ Object.create(对象/null) // 创建对象
 把另外的对象作为原型(继承)使用就用create
 不是所有的对象都继承于Object.prototype: *Object.create(null)*
 undefined和null不能被包装类转换，而且没有原型
- 
+
+第二个参数是一个对象，对象中是每一个的属性及属性描述符(例如Object.prototype上的属性就不能枚举或删除，还有框架)
+- value:指定属性值
+- writable:默认为 false,设置属性值是否可写
+- enumerable:默认为 false,设置属性是否可枚举( for/in)
+- configurable:默认为false,设置是否可修改属性特性和删除属性
+
+#### Object.defineProperty
+
+给对象扩展一个可描述的属性
+- 参数一：被设置的对象
+- 参数二：扩展的属性名
+- 参数三：扩展的属性的属性描述
+
+#### Object.definePorperties
+
+给对象扩展多个可描述的属性
+- 参数一：被设置的对象
+- 参数二：扩展的属性及属性描述，对象个格式
+
+#### 存取器属性
+
+getter和setter
+- 可以通过存取器属性获取或者设置对象内的某些属性的值
+- 当给这个属性设置值的时候，则会接收到这个值进行处理，当获取这个属性的值的时候，会进行计算返回值
 
 #### window和return
 
