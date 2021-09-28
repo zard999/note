@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 深拷贝
+      function deepClone(origin) {
+        if (checkType(origin) === "object") {
+          var target = {};
+        } else if (checkType(origin) === "array") {
+          var target = [];
+        } else {
+          return origin;
+        }
+
+        for (var key in origin) {
+          if (origin.hasOwnProperty(key)) {
+            target[key] = deepClone(origin[key]);
+          }
+        }
+        return target;
+      }
+      function checkType(obj) {
+        return Object.prototype.toString.call(obj).toLowerCase().slice(8, -1);
+      }
+      // 冒泡排序
+
+      function buttle(arr) {
+        var len = arr.length,
+          temp;
+        for (var i = 0; i < len - 1; i++) {
+          for (var j = 0; i < len - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+              temp = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = temp;
+            }
+          }
+        }
+        return arr;
+      }
+      // 快速排序
+      function quickSort(arr) {
+        var len = arr.length;
+        if (len <= 1) {
+          return arr;
+        }
+        var num = Math.floor(len / 2);
+        var newNum = arr.splice(num, 1);
+        var left = [];
+        var right = [];
+        arr.forEach(function (item, index) {
+          if (item < newNum) {
+            left.push(item);
+          } else {
+            right.push(item);
+          }
+        });
+        return quickSort(left).concat(newNum, quickSort(right));
+      }
+      var arr = [1, 234, 43, 534, 5345, 234, 345, 645, 13, 4, 5, 6];
+      console.log(quickSort(arr));
+    </script>
+  </body>
+</html>
