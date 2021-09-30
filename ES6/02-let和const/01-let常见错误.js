@@ -1,10 +1,8 @@
 // var a = a;
 // console.log(a);
 
-
 // let b = b;
 // console.log(b);
-
 
 // 暂时性死区
 // function test(x = y, y = 2) {
@@ -12,23 +10,19 @@
 // }
 // test();
 
-
 // console.log(typeof a);
 // let a;
-
 
 // for(;1;){
 //   let a = 1;
 // }
 // console.log(a); // 不报错，一直循环
 
-
 // for循环中i依然属于块级作用域
 // for(let i = 0; i < 10; i++){
 
 // }
 // console.log(i);
-
 
 // var arr = [];
 // for (var i = 0; i < 10; i++) {
@@ -42,19 +36,18 @@
 //   arr[i]();
 // }
 
-
+// let i = 0; //相当于let在外面
 // for(let i = 0; i < 10; i++){ // a是var或者let一样
 //   i = 'a'; // 加不加var都一样，上面为let了下面就不能加var，碰到let就会报错
 //   console.log(i);
 // }
 
-// for(let i = 0; i < 10; i++){ 
-//   let i = 'a'; 
-//   console.log(i);
-// } 
+for(let i = 0; i < 10; i++){
+  let i = 'a';
+  console.log(i);
+}
 
-
-// 块级作用域中声明拿书合法但并不推荐
+// 块级作用域中声明函数合法但并不推荐
 // 但下面的函数表达式的方法可以
 // try{
 //   var test1 = function (){

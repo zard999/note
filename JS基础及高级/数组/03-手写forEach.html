@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<ul>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
-		<script type="text/javascript">
-			var oLi = document.getElementsByTagName('li');
-			var data = [{
-					id: 1,
-					name: '张三'
-				},
-				{
-					id: 2,
-					name: '李四'
-				},
-				{
-					id: 3,
-					name: '王五'
-				},
-				{
-					id: 4,
-					name: '陈六'
-				},
-				{
-					id: 5,
-					name: '程七'
-				},
-				{
-					id: 6,
-					name: '饶八'
-				},
-				{
-					id: 7,
-					name: '黄九'
-				},
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <script type="text/javascript">
+      var oLi = document.getElementsByTagName("li");
+      var data = [
+        {
+          id: 1,
+          name: "张三",
+        },
+        {
+          id: 2,
+          name: "李四",
+        },
+        {
+          id: 3,
+          name: "王五",
+        },
+        {
+          id: 4,
+          name: "陈六",
+        },
+        {
+          id: 5,
+          name: "程七",
+        },
+        {
+          id: 6,
+          name: "饶八",
+        },
+        {
+          id: 7,
+          name: "黄九",
+        },
+      ];
 
-			];
+      Array.prototype.myForEach = function (fn) {
+        var arr = this,
+          len = arr.length,
+          arr2 = arguments[1] || window;
 
-			Array.prototype.myForEach = function(fn) {
-				var arr = this,
-					len = arr.length,
-					arr2 = arguments[1] || window;
+        for (var i = 0; i < len; i++) {
+          fn.call(arr2, arr[i], i, arr);
+        }
+      };
 
-				for (var i = 0; i < arr.length; i++) {
-					fn.call(arr2, arr[i], i, arr);
-				}
-			}
-
-			data.myForEach(function(item, index, array) {
-				this[index].innerHTML = item.id + '. ' + item.name;
-			}, oLi);
-		</script>
-	</body>
+      data.myForEach(function (item, index, array) {
+        this[index].innerHTML = item.id + ". " + item.name;
+      }, oLi);
+    </script>
+  </body>
 </html>
