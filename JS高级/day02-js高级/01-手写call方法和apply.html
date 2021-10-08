@@ -1,75 +1,73 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
 
-<head>
-	<meta charset="utf-8">
-	<title></title>
-</head>
+  <body>
+    <script>
+      function fn(a, b) {
+        console.log(this);
+        console.log(a + b);
+        return "hello";
+      }
 
-<body>
-	<script>
-		function fn(a, b) {
-			console.log(this);
-			console.log(a + b);
-			return 'hello';
-		}
+      Function.prototype.myCall = function (o) {
+        if (o === null || o === undefined) {
+          o = window;
+        }
 
-		Function.prototype.myCall = function(o){
-			if (o === null || o === undefined){
-				o = window;
-			}
+        if (typeof o !== "function" && typeof o !== "object") {
+          o = Object(o);
+        }
+        // 改变this指向
+        // 1. 这个函数里this指向调用的那个函数
+        // 2. 给o创建一个随机属性用来存this
+        var noRepeat = (Math.random() + Date.now()).toString(32).slice(0, 8);
+        o[noRepeat] = this;
+        // 调用函数
+        // 1. arguments是用来存实参的,需要转换成数组
+        // 2. 用slice切割数组
+        // 3. 调用函数eval
+        // 4. 删除noRepeat属性
+        var arg = Array.from(arguments).slice(1);
+        var result = eval("o[noRepeat](" + arg.toString() + ")");
+        delete o[noRepeat];
+        // 返回函数的返回值
+        // 用result装返回值
+        return result;
+      };
 
-			if (typeof o !== 'function' && typeof o !== 'object'){
-				o = Object(o);
-			}
-			// 改变this指向
-			// 1. 这个函数里this指向调用的那个函数
-			// 2. 给o创建一个随机属性用来存this
-			var noRepeat = (Math.random() + Date.now()).toString(32).slice(0, 8);
-			o[noRepeat] = this;
-			// 调用函数
-			// 1. arguments是用来存实参的,需要转换成数组
-			// 2. 用slice切割数组
-			// 3. 调用函数eval
-			// 4. 删除noRepeat属性
-			var arg = Array.from(arguments).slice(1);
-			var result = eval('o[noRepeat](' + arg.toString() + ')');
-			delete o[noRepeat];
-			// 返回函数的返回值
-			// 用result装返回值
-			return result;
-		}
+      Function.prototype.myApply = function (o) {
+        if (o === null || o === undefined) {
+          o = window;
+        }
 
-		Function.prototype.myApply = function(o){
-			if (o === null || o === undefined){
-				o = window;
-			}
+        if (typeof o !== "function" && typeof o !== "object") {
+          o = Object(o);
+        }
+        // 改变this指向
+        // 1. 这个函数里this指向调用的那个函数
+        // 2. 给o创建一个随机属性用来存this
+        var noRepeat = (Math.random() + Date.now()).toString(32).slice(0, 8);
+        o[noRepeat] = this;
+        // 调用函数
+        // 1. arguments是用来存实参的,需要转换成数组
+        // 3. 调用函数eval
+        // 4. 删除noRepeat属性
+        var arg = arguments[1];
+        var result = eval("o[noRepeat](" + arg.toString() + ")");
+        delete o[noRepeat];
+        // 返回函数的返回值
+        // 用result装返回值
+        return result;
+      };
 
-			if (typeof o !== 'function' && typeof o !== 'object'){
-				o = Object(o);
-			}
-			// 改变this指向
-			// 1. 这个函数里this指向调用的那个函数
-			// 2. 给o创建一个随机属性用来存this
-			var noRepeat = (Math.random() + Date.now()).toString(32).slice(0, 8);
-			o[noRepeat] = this;
-			// 调用函数
-			// 1. arguments是用来存实参的,需要转换成数组
-			// 3. 调用函数eval
-			// 4. 删除noRepeat属性
-			var arg = arguments[1];
-			var result = eval('o[noRepeat](' + arg.toString() + ')');
-			delete o[noRepeat];
-			// 返回函数的返回值
-			// 用result装返回值
-			return result;
-		}
-
-		// var result = fn.myCall({ name: '张珊' }, 1, 2);
-		var result2 = fn.myApply({ name: '张珊' }, [1, 2]);
-		// console.log(result);
-		console.log(result2);
-	</script>
-</body>
-
+      // var result = fn.myCall({ name: '张珊' }, 1, 2);
+      var result2 = fn.myApply({ name: "张珊" }, [1, 2]);
+      // console.log(result);
+      console.log(result2);
+    </script>
+  </body>
 </html>

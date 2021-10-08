@@ -223,3 +223,72 @@
 // const arr = [1, 2, 3, 4, 5, 6];
 // const re = arr.reduce((prev, cur) => prev + cur);
 // console.log(re);
+
+// const myPormise = new Promise((resolve, reject) => {
+//   console.log("Promise");
+
+//   setTimeout(() => {
+//     console.log("计时器执行成功");
+//     resolve("Promise执行成功");
+//   }, 2000);
+// });
+
+// const p1 = new Promise((resolve, reject) => {
+//   try {
+//     throw new Error("hhhhh");
+//     setTimeout(() => {
+//       const data = {
+//         name: "data",
+//       };
+//       resolve();
+//     });
+//   } catch (e) {
+//     console.log("e", e);
+//   }
+// });
+// console.log(p1);
+
+console.log(111);
+
+const promise = new Promise((resolve, reject) => {
+  reject();
+  console.log(222);
+});
+
+promise
+  .then(() => {
+    console.log(333);
+    return new Promise((resolve) => {
+      reject();
+    });
+  })
+  .catch(() => {
+    console.log(444);
+  })
+  .then(() => {
+    console.log(555);
+    return new Promise((reject, resolve) => {
+      reject();
+      // resolve();
+    });
+  })
+  .catch(() => {
+    console.log(666);
+    throw new Error("报错了~");
+  })
+  .then(() => {
+    console.log(777);
+    throw new Error("报错了~");
+  })
+  .then(() => console.log(888))
+  .then(() => console.log(999))
+  .catch(() => console.log(101010));
+
+console.log(111111);
+// 1
+// 222
+// 111111
+// 444
+// 555
+// 少了一个777(回调函数的参数是反的，一定得注意)
+// 101010

@@ -42,10 +42,10 @@
 //   console.log(i);
 // }
 
-for(let i = 0; i < 10; i++){
-  let i = 'a';
-  console.log(i);
-}
+// for(let i = 0; i < 10; i++){
+//   let i = 'a';
+//   console.log(i);
+// }
 
 // 块级作用域中声明函数合法但并不推荐
 // 但下面的函数表达式的方法可以
@@ -63,3 +63,16 @@ for(let i = 0; i < 10; i++){
 // do{
 //   return 1;
 // }
+
+
+// let a = 1;
+// {
+//   function a(){
+//     console(1);
+//   }
+// }
+// console.log(a);
+
+
+
+

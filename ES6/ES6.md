@@ -33,6 +33,14 @@ kiss 原则(Keep It Simple & Stupid)
 - let 本质上就是为 js 增加一个块级作用域
 - 块级作用域是没有返回值的
 
+#### const
+
+TDZ(Temporal Dead Zone):暂时性死区
+
+- 一旦定义必须赋值，值不能被更改
+- 有块级作用域，不能提升，有暂时性死区
+- 与 let 一样不能重复声明
+
 #### 指数运算符
 
 - ES3 中使用 Math.pow 方法可以计算某个数值的 n 次方

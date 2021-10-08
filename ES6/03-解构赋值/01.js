@@ -48,4 +48,3 @@
 //   },
 // } = person;
 // console.log(name);
-
