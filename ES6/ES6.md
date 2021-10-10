@@ -51,3 +51,26 @@ TDZ(Temporal Dead Zone):暂时性死区
 
 0 进制默认为 10 进制
 没有 1 进制，为 NaN
+
+#### 解构赋值
+
+在解构中使用对象或是数组的时候，慎用（可读性非常差）
+
+#### 解构赋值隐式转换
+
+'hello'会转换成类数组(对象)
+Number、Boolear、String 的 toString 方法也可以转换(隐式转换：转换成相应的包装类)
+undefined 和 null 是不能进行隐式转换的，会报错
+
+#### 函数的形参和长度
+
+函数的形参赋了值就不会算在 length 中，如果放在第一位，length 为 0
+一旦给了形参默认值，arugments 和形参的映射就不存在了
+
+#### fetch
+
+#### Promise
+
+Promise：异步问题同步化解决方案(最优解)
+为什么 Promise 执行时同步，p.then 是异步
+ajax 分离出来的程序，要设置 async 为 false，但是分离出来之后还是会阻塞后面的程序

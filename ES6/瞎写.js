@@ -248,43 +248,43 @@
 // });
 // console.log(p1);
 
-console.log(111);
+// console.log(111);
 
-const promise = new Promise((resolve, reject) => {
-  reject();
-  console.log(222);
-});
+// const promise = new Promise((resolve, reject) => {
+//   reject();
+//   console.log(222);
+// });
 
-promise
-  .then(() => {
-    console.log(333);
-    return new Promise((resolve) => {
-      reject();
-    });
-  })
-  .catch(() => {
-    console.log(444);
-  })
-  .then(() => {
-    console.log(555);
-    return new Promise((reject, resolve) => {
-      reject();
-      // resolve();
-    });
-  })
-  .catch(() => {
-    console.log(666);
-    throw new Error("报错了~");
-  })
-  .then(() => {
-    console.log(777);
-    throw new Error("报错了~");
-  })
-  .then(() => console.log(888))
-  .then(() => console.log(999))
-  .catch(() => console.log(101010));
+// promise
+//   .then(() => {
+//     console.log(333);
+//     return new Promise((resolve) => {
+//       reject();
+//     });
+//   })
+//   .catch(() => {
+//     console.log(444);
+//   })
+//   .then(() => {
+//     console.log(555);
+//     return new Promise((reject, resolve) => {
+//       reject();
+//       // resolve();
+//     });
+//   })
+//   .catch(() => {
+//     console.log(666);
+//     throw new Error("报错了~");
+//   })
+//   .then(() => {
+//     console.log(777);
+//     throw new Error("报错了~");
+//   })
+//   .then(() => console.log(888))
+//   .then(() => console.log(999))
+//   .catch(() => console.log(101010));
 
-console.log(111111);
+// console.log(111111);
 // 1
 // 222
 // 111111
@@ -292,3 +292,136 @@ console.log(111111);
 // 555
 // 少了一个777(回调函数的参数是反的，一定得注意)
 // 101010
+
+// const promise = new Promise((resolve, reject) => {
+//   console.log("A数据开始准备");
+//   try {
+//     setTimeout(() => {
+//       const data = {
+//         name: "张三",
+//       };
+//       resolve(data);
+//       console.log("A数据完成");
+//     }, 2000);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// });
+
+// promise
+//   .then((data) => {
+//     return new Promise((resolve, reject) => {
+//       console.log("B数据开始准备");
+//       try {
+//         setTimeout(() => {
+//           const dataB = {
+//             age: 22,
+//           };
+//           resolve(Object.assign({}, data, dataB));
+//           console.log("B数据完成");
+//         }, 1500);
+//       } catch (e) {
+//         console.log(e);
+//       }
+//     });
+//   })
+//   .then((data) => {
+//     return new Promise((resolve, reject) => {
+//       console.log("C数据开始准备");
+//       try {
+//         setTimeout(() => {
+//           const dataC = {
+//             sex: "男",
+//           };
+//           resolve(Object.assign({}, data, dataC));
+//           console.log("C数据完成");
+//         }, 1000);
+//       } catch (e) {
+//         console.log(e);
+//       }
+//     });
+//   });
+
+// console.log(9 >> 1);
+
+// async function getData() {
+//   const dataA = await new Promise((resolve, reject) => {
+//     console.log("A数据开始");
+//     try {
+//       setTimeout(() => {
+//         console.log("A完成");
+//         const data = {
+//           name: "张三",
+//         };
+//         resolve(data);
+//       }, 2000);
+//     } catch (e) {
+//       reject(e);
+//     }
+//   });
+
+//   const dataB = await new Promise((resolve, reject) => {
+//     console.log("B数据开始");
+//     try {
+//       setTimeout(() => {
+//         console.log("B完成");
+//         const data = {
+//           age: "22",
+//         };
+//         resolve(Object.assign({}, data, dataA));
+//       }, 1500);
+//     } catch (e) {
+//       reject(e);
+//     }
+//   });
+
+//   return await new Promise((resolve, reject) => {
+//     console.log("A数据开始");
+//     try {
+//       setTimeout(() => {
+//         console.log("A完成");
+//         const data = {
+//           sex: "男",
+//         };
+//         resolve(Object.assign({}, dataB, data));
+//       }, 1000);
+//     } catch (e) {
+//       reject(e);
+//     }
+//   });
+// }
+
+// const result = getData();
+// result
+//   .then((value) => {
+//     console.log(value);
+//   })
+//   .catch((reson) => {
+//     console.log(reson);
+//   });
+
+// function timeout(ms) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(resolve, ms, "done");
+//   });
+// }
+
+// timeout(2000).then((value) => {
+//   console.log(value);
+// });
+
+var x = 1;
+function test(
+  x,
+  y = function () {
+    var x = 2;
+    console.log(x);
+  }
+) {
+  var x = 3;
+  y();
+  console.log(x);
+}
+
+test();
+console.log(x);
