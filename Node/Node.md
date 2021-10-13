@@ -1,3 +1,25 @@
+#### URI
+
+URI(Uniform Resource Identifier): 统一资源标识符，用来唯一的标识一个资源
+
+URL(Uniform Resource Locator)：统一资源定位符。URL 可以用来标识一个资源，而且还指明了如何定位这个资源,用地址定义一个资源
+
+URN(Uniform Resource Name)：统一资源命名。即通过名字来表示资源的。 用名称定位一个资源
+
+- https 默认端口号 443 http 默认端口号 80
+- URL 与 URN 是 URI 的子集
+- URI 只是资源标识
+- URL 协议名称 + 主机名称 + 端口号 + 路径 + 文件 + 查询所需字符串
+- URN 不带协议名称，剩下的内容加起来就是 URN
+
+#### 客户端与服务端
+
+客户端：Client -> 客户所使用的电脑中的应用程序
+服务端：Server -> 存放网页、客户端程序、数据处理程序、数据库的电脑
+
+C/S -> Client/Server -> 将应用程序安装在客户端电脑中，由服务端提供客户端所需要的数据(qq 的 PC 端)
+B/S -> Browser/Server -> 利用 WEB 浏览器呈现客户端程序界面，由服务端提供客户端程序所需要的数据。
+
 #### fs
 
 - promisify

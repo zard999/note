@@ -716,13 +716,30 @@
 //   console.log("文件关闭了");
 // });
 
-const fs = require("fs");
-const path = require("path");
+// const fs = require("fs");
+// const path = require("path");
 
-const filePath1 = path.resolve(__dirname, "01.txt");
-const filePath2 = path.resolve(__dirname, "03.txt");
+// const filePath1 = path.resolve(__dirname, "01.txt");
+// const filePath2 = path.resolve(__dirname, "03.txt");
 
-const rs = fs.createReadStream(filePath1);
-const ws = fs.createWriteStream(filePath2);
+// const rs = fs.createReadStream(filePath1);
+// const ws = fs.createWriteStream(filePath2);
 
-rs.pipe(ws);
+// rs.pipe(ws);
+
+// const http = require("http");
+// let count = 0;
+
+// const server = http.createServer((request, response) => {
+//   count++;
+//   response.setHeader("Content-Type", "text/plain;charset=utf-8");
+//   response.end(`您是第${count}位用户`);
+// });
+
+// server.listen(3000, "127.0.0.1", (err) => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log("服务已开启");
+// });
