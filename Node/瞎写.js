@@ -577,14 +577,152 @@
 //   console.log("服务器已启动");
 // });
 
+// const http = require("http");
+// let count = 0;
+// const server = http.createServer((request, response) => {
+//   count++;
+//   response.setHeader("Content-Type", "text/plain;charset=utf-8");
+//   response.end(`您是第${count}位用户`);
+// });
+
+// server.listen(3000, "127.0.0.1", (err) => {
+//   if (err) {
+//     console.log("err", err);
+//   }
+//   console.log("服务已开启");
+// });
+
+// 同步写入
+// const fs = require("fs");
+// const path = require("path");
+// const filePath = path.resolve(__dirname, "01.txt");
+
+// const fd = fs.open(filePath, "a", (err, fd) => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log("打开文件成功");
+
+//   fs.write(fd, "hhh", (err) => {
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
+//     console.log("写入成功");
+
+//     fs.close(fd, (err) => {
+//       if (err) {
+//         console.log(err);
+//         return;
+//       }
+//       console.log("关闭成功");
+//     });
+//   });
+// });
+
+// 异步写入解决回调地域
+// const fs = require("fs");
+// const path = require("path");
+// const filePath = path.resolve(__dirname, "01.txt");
+
+// (async function () {
+//   const fd = await new Promise((resolve, reject) => {
+//     fs.open(filePath, "a", (err, fd) => {
+//       if (err) {
+//         return reject(err);
+//       }
+//       console.log("文件打开成功");
+//       resolve(fd);
+//     });
+//   });
+
+//   await new Promise((resolve, reject) => {
+//     fs.write(fd, "hhh", (err) => {
+//       if (err) {
+//         reject(err);
+//       }
+//       console.log("文件写入成功");
+//       resolve();
+//     });
+//   });
+
+//   await new Promise((resolve, reject) => {
+//     fs.close(fd, (err) => {
+//       if (err) {
+//         reject(err);
+//       }
+//       console.log("文件关闭成功");
+//       resolve();
+//     });
+//   });
+// })();
+
+// const fs = require("fs");
+// const path = require("path");
+// const { promisify } = require("util");
+
+// const filePath = path.resolve(__dirname, "01.txt");
+
+// const open = promisify(fs.open);
+// const write = promisify(fs.write);
+// const close = promisify(fs.close);
+
+// (async function () {
+//   const fd = await open(filePath, "a");
+//   await write(fd, "hhh");
+//   await close(fd);
+// })();
+
+// fs.writeFile(filePath, "hhh", (err) => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log("文件打开写入关闭成功");
+// });
+
+// fs.readFile(filePath, (err, data) => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log(data.toString());
+// });
+
+// const ws = fs.createWriteStream(filePath);
+
+// ws.write("hhh");
+// ws.write("hhh");
+// ws.write("hhh");
+// ws.end();
+// // ws.close();
+
+// ws.on("open", () => {
+//   console.log("文件打开了");
+// });
+
+// ws.on("close", () => {
+//   console.log("文件关闭了");
+// });
+
+// const rs = fs.createReadStream(filePath);
+
+// rs.on("data", (chunk) => {
+//   console.log(chunk.toString());
+// });
+
+// rs.on("end", () => {
+//   console.log("文件关闭了");
+// });
+
 const fs = require("fs");
 const path = require("path");
 
-const filePath = path.resolve(__dirname, "01.txt");
+const filePath1 = path.resolve(__dirname, "01.txt");
+const filePath2 = path.resolve(__dirname, "03.txt");
 
-const fd = fs.openSync(filePath, "a");
-console.log(fd);
+const rs = fs.createReadStream(filePath1);
+const ws = fs.createWriteStream(filePath2);
 
-fs.writeSync(fd, "hhh");
-
-fs.closeSync(fd);
+rs.pipe(ws);

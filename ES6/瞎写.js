@@ -410,18 +410,23 @@
 //   console.log(value);
 // });
 
-var x = 1;
-function test(
-  x,
-  y = function () {
-    var x = 2;
-    console.log(x);
-  }
-) {
-  var x = 3;
-  y();
-  console.log(x);
-}
+// var x = 1;
+// function test(
+//   x,
+//   y = function () {
+//     var x = 2;
+//     console.log(x);
+//   }
+// ) {
+//   var x = 3;
+//   y();
+//   console.log(x);
+// }
 
-test();
-console.log(x);
+// test();
+// console.log(x);
+
+function foo() {}
+
+console.log(new Function().name);
+console.log(foo.bind({}).name);

@@ -44,7 +44,7 @@ TDZ(Temporal Dead Zone):暂时性死区
 #### 指数运算符
 
 - ES3 中使用 Math.pow 方法可以计算某个数值的 n 次方
-- \*\*：ES11 新加的
+- '**'：ES11 新加的
 - 指数运算是从右向左计算的
 
 #### 进制转换
@@ -71,11 +71,57 @@ undefined 和 null 是不能进行隐式转换的，会报错
 
 #### 箭头函数
 
+1. this 由外层的函数的作用域来决定(call 并不能改变箭头函数的 this)
+2. => 不能作为构造函数来使用(没有 this)
+3. 没有 arguments 对象，用 rest(拓展运算符)替代
+4. yield 命令不能生效，在 generator 函数中(没有 this)
+
+this 指向是固化的 => 函数的内部是并没有自己的 this，只能通过父级作用域来获取到 this
+
+使用场景：
+
+- 一般是回调函数
+
 #### ...rest 运算符
 
 展开或是收集
 只能放在后面
 函数形参默认值和 rest 运算符都不能找到 length
+
+#### 函数名扩展
+
+new Function().name: anonymous(匿名的)
+foo.bind().name: bound foo
+
+#### defineProperty
+
+- configurable: 可配置的，false => 不能删除
+- enumerable: 可枚举的，
+- writable: 可写,false = >不能重新赋值，严格模式会报错，删除可以正常删除
+- value: 值
+
+#### getter,setter
+
+属性描述符的一种,getter 和 setter 操作覆盖了原本的[[Get]]和[[Put]]操作
+
+get 操作：重写属性获取(会直接调用)
+属性的获取: [[Get]]默认操作,查找当前属性，如果没有，查找原型
+
+put 操作：
+赋值操作: [[Put]]默认操作，
+
+**get,set 定义的函数并不能直接获取，得在 Object.getOwnPropertyDescriptor(obj, 'foo') 上获取**
+
+#### preventExtensions 和 seal 和 freeze
+
+preventExtensions: 使对象不能扩展属性
+isExtensible: 检测对象是否能扩展属性
+
+seal: 对象的密封，本质上还是调用 preventExtensions
+isSealed: 检查 seal
+
+freeze(浅拷贝)：被冻住
+isFrozen：检查 freeze
 
 #### Promise
 
