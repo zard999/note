@@ -44,7 +44,7 @@ TDZ(Temporal Dead Zone):暂时性死区
 #### 指数运算符
 
 - ES3 中使用 Math.pow 方法可以计算某个数值的 n 次方
-- '**'：ES11 新加的
+- '\*\*'：ES11 新加的
 - 指数运算是从右向左计算的
 
 #### 进制转换
@@ -114,14 +114,26 @@ put 操作：
 
 #### preventExtensions 和 seal 和 freeze
 
-preventExtensions: 使对象不能扩展属性
-isExtensible: 检测对象是否能扩展属性
+Object.preventExtensions(obj): 使对象不能扩展属性
+Object.isExtensible(obj): 检测对象是否能扩展属性
 
-seal: 对象的密封，本质上还是调用 preventExtensions
-isSealed: 检查 seal
+Object.seal(obj): 对象的密封，本质上还是调用 preventExtensions，然后配置 configurable:false
+Object.isSealed(obj): 检查 seal
 
-freeze(浅拷贝)：被冻住
-isFrozen：检查 freeze
+Object.freeze(obj)(浅拷贝)：被冻住
+Object.isFrozen(obj)：检查 freeze
+
+#### Object.is
+
+Object.is 和全等的底层都是调用 sameValue 算法
+
+Object.is(NaN, NaN) //true
+Object.is(+0, -0) //false
+
+#### Object.assign
+
+- 不是对象会隐式转换成对象，字符串转化成对象变成类数组，拥有可枚举性，才能装进对象里
+- assign 复制的对象是浅拷贝的
 
 #### Promise
 
