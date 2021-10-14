@@ -24,7 +24,7 @@
 
 // let x = 1;
 // function foo(x = x) {
-//   //相当于let x = x
+//   // let x = x;
 //   console.log(x);
 // }
 // foo();
