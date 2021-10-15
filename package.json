@@ -1,5 +1,5 @@
 {
-  "name": "mongon",
+  "name": "note",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^6.0.10"
+    "express": "^4.17.1",
+    "mongoose": "^6.0.11"
   }
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="#" id="form">
+      <label>
+        用户名：
+        <input type="text" name="user" id="user" />
+      </label>
+      <label>
+        密码：
+        <input type="text" name="password" id="pass" />
+      </label>
+      <button id="btn">登陆</button>
+    </form>
+    <script>
+      const oForm = document.getElementById("form");
+      const oUser = document.getElementById("user");
+      const oPass = document.getElementById("pass");
+      const oBtn = document.getElementById("btn");
+
+      oForm.onsubmit = function () {
+        const xhr = new XMLHttpRequest();
+        xhr.open("DELETE", `/login?user=${oUser.value}&pass=${oPass.value}`);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.status > 199 && xhr.status < 300 && xhr.readyState === 4) {
+            console.log(xhr.responseText);
+          }
+        };
+        return false;
+      };
+    </script>
+  </body>
+</html>
