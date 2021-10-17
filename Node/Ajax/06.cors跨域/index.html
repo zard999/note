@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <form action="#" id="form">
+      <label>
+        用户名：
+        <input type="text" name="user" id="user" />
+      </label>
+      <label>
+        用户名：
+        <input type="password" name="pass" id="pass" />
+      </label>
+      <button id="btn">登陆</button>
+    </form>
+    <script>
+      const oForm = document.getElementById("form");
+      const oUser = document.getElementById("user");
+      const oPass = document.getElementById("pass");
+
+      oForm.onsubmit = function () {
+        axios
+          .get("http://127.0.0.1:4000/login", {
+            params: {
+              user: oUser.value,
+              pass: oPass.value,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+        return false;
+      };
+    </script>
+  </body>
+</html>

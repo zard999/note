@@ -12,7 +12,7 @@ app.use(
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  const filePath = path.resolve(__dirname, "03.put请求.html");
+  const filePath = path.resolve(__dirname, "06.promise封装ajax.html");
   res.sendFile(filePath);
 });
 

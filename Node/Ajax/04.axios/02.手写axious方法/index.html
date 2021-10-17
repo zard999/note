@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <form id="form">
+      <div>
+        <span>用户名</span>
+        <input type="text" name="user" id="user" />
+      </div>
+      <div>
+        <span>密码</span>
+        <input type="password" name="pass" id="pass" />
+      </div>
+      <button id="btn">提交</button>
+    </form>
+    <script>
+      const oForm = document.getElementById("form");
+      const oPass = document.getElementById("pass");
+      const oUser = document.getElementById("user");
+
+      oForm.onsubmit = function () {
+        myAxios({
+          url: "/login",
+          method: "GET",
+          data: {
+            user: oUser.value,
+            pass: oPass.value,
+          },
+          params: {
+            user: oUser.value,
+            pass: oPass.value,
+          },
+        })
+          .then((val) => console.log(val))
+          .catch((reason) => console.log(reason));
+        return false;
+      };
+
+      function myAxios({ url, method = "get", data = {}, params }) {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          let query = "?";
+          if (params) {
+            query += Object.keys(params)
+              .reduce((p, c) => {
+                return p + c + "=" + params[c] + "&";
+              }, query)
+              .slice(0 - 1);
+          }
+          xhr.open(method, url + query, true);
+          if (
+            method.toLowerCase() === "post" ||
+            method.toLowerCase() === "post"
+          ) {
+            xhr.send(JSON.stringify(data));
+          } else {
+            xhr.send();
+          }
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4) return;
+
+            if (xhr.status >= 200 && xhr.status < 300) {
+              resolve({
+                config: {},
+                data: JSON.parse(xhr.responseText),
+                Headers: {},
+                request: xhr,
+                status: xhr.status,
+                statusText: "XXx",
+              });
+            } else {
+              reject("失败");
+            }
+          };
+        });
+      }
+    </script>
+  </body>
+</html>

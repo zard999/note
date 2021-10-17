@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+  </head>
+  <body>
+    <form action="#" id="form">
+      <label>
+        用户名：
+        <input type="text" name="user" id="user" />
+      </label>
+      <label>
+        密码:
+        <input type="password" name="pass" id="pass" />
+      </label>
+      <button id="btn">登陆</button>
+    </form>
+    <script>
+      $(function () {
+        $("#form").submit(function () {
+          $.getJSON(
+            `http://127.0.0.1:4000/login?user=${$("#user").val()}&pass=${$(
+              "#pass"
+            ).val()}&callback=?`,
+            (data) => console.log(data)
+          );
+          return false;
+        });
+      });
+    </script>
+  </body>
+</html>
