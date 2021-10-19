@@ -20,6 +20,10 @@ URN(Uniform Resource Name)：统一资源命名。即通过名字来表示资源
 C/S -> Client/Server -> 将应用程序安装在客户端电脑中，由服务端提供客户端所需要的数据(qq 的 PC 端)
 B/S -> Browser/Server -> 利用 WEB 浏览器呈现客户端程序界面，由服务端提供客户端程序所需要的数据。
 
+#### DNS 解析
+
+输入 url -> 看运营商的 DNS 本地服务器里有没有 -> 有直接返回没有先去根 DNS 服务器里去 -> 再找.com 域服务器(没查到) -> 去对应域名.com 域去找
+
 #### fs
 
 - promisify
@@ -28,6 +32,15 @@ B/S -> Browser/Server -> 利用 WEB 浏览器呈现客户端程序界面，由�
 - 流式读取：createReadStream -> end(事件：读取完自动关)、data(事件：读取的时候，chunk 是每次读取的数据)
 - 流式读写：在读取中写入 chunk
 - pipe 简单流式读写：rs.pipe(ws);
+
+#### AJAX
+
+JavaSript 脚本发起 HTTP 通信
+JavaScript 异步通信：请求服务器返回 XML 文档，前端从 XML 文档中提取数据，再在不刷新页面整个网页的基础上，渲染到网页相应的位置
+
+#### onreadystatechange
+
+xhr.readystate()
 
 #### http 模块
 
@@ -38,5 +51,3 @@ B/S -> Browser/Server -> 利用 WEB 浏览器呈现客户端程序界面，由�
 在请求和响应之前拦截，做一些操作之后放行
 
 #### cookie
-
-

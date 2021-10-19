@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="referrer" content="no-referrer" />
+    <title>豆瓣音乐搜索</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+  </head>
+  <body>
+    <div class="search-wrap">
+      <input
+        type="text"
+        id="J_searchInput"
+        class="search-input"
+        placeholder="唱片名、表演者、条码、ISRC"
+      />
+      <ul class="search-list J_list">
+        <li class="list-item">
+          <a href="{{url}}" target="_blank" class="item-lk">
+            <div class="item-img">
+              <img src="{{image}}" alt="{{title}}" />
+            </div>
+            <div class="intro">
+              <h1 class="title">{{title}}</h1>
+              <p class="author">表演者：<span>{{singer}}</span></p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <script type="text/html" id="J_searchItemTpl">
+      <li class="list-item">
+        <a href="{{url}}" target="_blank" class="item-lk">
+          <div class="item-img">
+            <img src="{{image}}" alt="{{title}}" />
+          </div>
+          <div class="intro">
+            <h1 class="title">{{title}}</h1>
+            <p class="author">表演者：<span>{{singer}}</span></p>
+          </div>
+        </a>
+      </li>
+    </script>
+    <script>
+      //https://api.douban.com/v2/music/search?q=关键字&callback=回调函数&count=返回条数
+      const oSearchInput = document.getElementById("J_searchInput");
+      const oSearchItemTpl = document.getElementById("J_searchItemTpl");
+      const oList = document.querySelector(".J_list");
+      //   http://t.yushu.im/v2/movie/search?apikey=0b2bdeda43b5688921839c8ecb20399b&q=绝命毒师&callback=fn
+      oSearchInput.onkeyup = function () {
+        axios
+          .get("http://localhost:3000/search?keywords=海阔天空", {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data.data);
+          });
+        oList.style.display = "block";
+      };
+    </script>
+  </body>
+</html>

@@ -1,7 +1,12 @@
 require("./db");
 const express = require("express");
 const { resolve } = require("path");
+const { exec } = require("child_process");
 const app = express();
+
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
 
 app.use(
   express.urlencoded({
@@ -16,9 +21,11 @@ app.use("/public/", express.static(resolve(__dirname, "./public")));
 
 const registerRouter = require("./routers/registerRouter");
 const loginRouter = require("./routers/loginRouter");
+const centerRouter = require("./routers/centerRouter");
 
 app.use(registerRouter);
 app.use(loginRouter);
+app.use(centerRouter);
 
 app.listen(4000, (err) => {
   if (err) {
@@ -26,4 +33,5 @@ app.listen(4000, (err) => {
     return;
   }
   console.log("服务已开启 http://localhost:4000");
+  exec("start http://localhost:4000");
 });
