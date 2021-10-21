@@ -403,17 +403,328 @@
 //   .then((res) => console.log("result: ", res))
 //   .catch((err) => console.log(err));
 
-// 4.4
-function runAsync(x) {
-  const p = new Promise((r) => setTimeout(() => r(x, console.log(x)), 1000));
-  return p;
+// 4.4  0 Error:0 1 2 3
+// function runAsync(x) {
+//   const p = new Promise((r) => setTimeout(() => r(x, console.log(x)), 1000));
+//   return p;
+// }
+// function runReject(x) {
+//   const p = new Promise((res, rej) =>
+//     setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x)
+//   );
+//   return p;
+// }
+// Promise.race([runReject(0), runAsync(1), runAsync(2), runAsync(3)])
+//   .then((res) => console.log("result: ", res))
+//   .catch((err) => console.log(err));
+
+// 5.1(1)  async1 start async2 start async1 end
+// async function async1() {
+//   console.log("async1 start");
+//   await async2();
+//   //   阻塞下面的代码，先执行外面的代码
+//   console.log("async1 end");
+// }
+// async function async2() {
+//   console.log("async2");
+// }
+// async1();
+// console.log("start");
+
+// 5.1(2)   async1 start async2 start async1 end
+// async function async1() {
+//   console.log("async1 start");
+//   // 原来代码
+//   // await async2();
+//   // console.log("async1 end");
+
+//   // 转换后代码
+//   new Promise((resolve) => {
+//     console.log("async2");
+//     resolve();
+//   }).then((res) => console.log("async1 end"));
+// }
+// async function async2() {
+//   console.log("async2");
+// }
+// async1();
+// console.log("start");
+
+// 5.1(3)   async1 start promise async1 end start
+// async function async1() {
+//   console.log("async1 start");
+//   new Promise((resolve) => {
+//     console.log("promise");
+//   });
+//   console.log("async1 end");
+// }
+// async1();
+// console.log("start");
+
+// 5.2  async1 start  async2 start saync1 end timer
+// async function async1() {
+//   console.log("async1 start");
+//   await async2();
+//   console.log("async1 end");
+// }
+// async function async2() {
+//   setTimeout(() => {
+//     console.log("timer");
+//   }, 0);
+//   console.log("async2");
+// }
+// async1();
+// console.log("start");
+
+// 5.3  async1 start saync2 start async1 end timer2 timer3 timer1
+// async function async1() {
+//   console.log("async1 start");
+//   await async2();
+//   console.log("async1 end");
+//   setTimeout(() => {
+//     console.log("timer1");
+//   }, 0);
+// }
+// async function async2() {
+//   setTimeout(() => {
+//     console.log("timer2");
+//   }, 0);
+//   console.log("async2");
+// }
+// async1();
+// setTimeout(() => {
+//   console.log("timer3");
+// }, 0);
+// console.log("start");
+
+// 5.4  123
+// async function fn() {
+//   // return await 1234
+//   // 等同于
+//   return 123;
+// }
+// fn().then((res) => console.log(res));
+
+// 5.5  script start async1 start promise1 script end(async1后面的await的Promise是没有返回值的，也就是它一直是pending状态，因此一直是await在等待，始终没有响应)
+// async function async1() {
+//   console.log("async1 start");
+//   await new Promise((resolve) => {
+//     console.log("promise1");
+//   });
+//   console.log("async1 success");
+//   return "async1 end";
+// }
+// console.log("srcipt start");
+// async1().then((res) => console.log(res));
+// console.log("srcipt end");
+
+// 5.6  script start async1 start promise1 script end promise1 resolve async1 success async1 end
+// async function async1() {
+//   console.log("async1 start");
+//   await new Promise((resolve) => {
+//     console.log("promise1");
+//     resolve("promise1 resolve");
+//   }).then((res) => console.log(res));
+//   console.log("async1 success");
+//   return "async1 end";
+// }
+// console.log("srcipt start");
+// async1().then((res) => console.log(res));
+// console.log("srcipt end");
+
+// 5.7  script start async1 start promise1 promise2 async1 success async1 end timer
+// async function async1() {
+//   console.log("async1 start");
+//   await new Promise((resolve) => {
+//     console.log("promise1");
+//     resolve("promise resolve");
+//   });
+//   console.log("async1 success");
+//   return "async1 end";
+// }
+// console.log("srcipt start");
+// async1().then((res) => {
+//   console.log(res);
+// });
+// new Promise((resolve) => {
+//   console.log("promise2");
+//   setTimeout(() => {
+//     console.log("timer");
+//   });
+// });
+
+// 5.8  script start async1 start async2 promise1 script end async1 end promise2 setTimeout
+// async function async1() {
+//   console.log("async1 start");
+//   await async2();
+//   console.log("async1 end");
+// }
+
+// async function async2() {
+//   console.log("async2");
+// }
+
+// console.log("script start");
+
+// setTimeout(function () {
+//   console.log("setTimeout");
+// }, 0);
+
+// async1();
+
+// new Promise(function (resolve) {
+//   console.log("promise1");
+//   resolve();
+// }).then(function () {
+//   console.log("promise2");
+// });
+// console.log("script end");
+
+// 5.9  test start... 执行testSometing promise start... test end... testSometing 执行testAsync promise hello async testSometing hello async
+// async function testSometing() {
+//   console.log("执行testSometing");
+//   return "testSometing";
+// }
+
+// async function testAsync() {
+//   console.log("执行testAsync");
+//   return Promise.resolve("hello async");
+// }
+
+// async function test() {
+//   console.log("test start...");
+//   const v1 = await testSometing();
+//   console.log(v1);
+//   const v2 = await testAsync();
+//   console.log(v2);
+//   console.log(v1, v2);
+// }
+// test();
+// var promise = new Promise((resolve) => {
+//   console.log("promise start...");
+//   resolve("promise");
+// });
+// promise.then((val) => console.log(val));
+
+// console.log("test end...");
+
+// 6.1  async2 Erroe:error async1 async1 success
+// async function async1() {
+//   await async2();
+//   console.log("async1");
+//   return "async1 success";
+// }
+// async function async2() {
+//   return new Promise((resolve, reject) => {
+//     console.log("async2");
+//     reject("error");
+//   });
+// }
+// async1().then((res) => console.log(res));
+
+// 6.2 script start Error:error!!! async1 async1 success
+// async function async1() {
+//   try {
+//     await Promise.reject("error!!!");
+//   } catch (e) {
+//     console.log(e);
+//   }
+//   console.log("async1");
+//   return Promise.resolve("async1 success");
+// }
+// async1().then((res) => console.log(res));
+// console.log("script start");
+
+// 7.1  3 7 4 1 2 5 Promise{<fulfilled>:1}
+// const first = () =>
+//   new Promise((resolve, reject) => {
+//     console.log(3);
+//     let p = new Promise((resolve, reject) => {
+//       console.log(7);
+//       setTimeout(() => {
+//         console.log(5);
+//         resolve(6);
+//         console.log(p);
+//       }, 0);
+//       resolve(1);
+//     });
+//     resolve(2);
+//     p.then((arg) => {
+//       console.log(arg);
+//     });
+//   });
+// first().then((arg) => {
+//   console.log(arg);
+// });
+// console.log(4);
+
+// 7.2  script start async1 promise1 script end 1 timer1 timer2(注意延时器的时间)
+// const async1 = async () => {
+//   console.log("async1");
+//   setTimeout(() => {
+//     console.log("timer1");
+//   }, 2000);
+//   await new Promise((resolve) => {
+//     console.log("promise1");
+//   });
+//   console.log("async1 end");
+//   return "async1 success";
+// };
+// console.log("script start");
+// async1().then((res) => console.log(res));
+// console.log("script end");
+// Promise.resolve(1)
+//   .then(2)
+//   .then(Promise.resolve(3))
+//   .catch(4)
+//   .then((res) => console.log(res));
+// setTimeout(() => {
+//   console.log("timer2");
+// }, 1000);
+
+// 7.3  resolve1 finally undifined timer1 Promise{<fulfilled>: undefined}
+// const p1 = new Promise((resolve) => {
+//   setTimeout(() => {
+//     resolve("resolve3");
+//     console.log("timer1");
+//   }, 0);
+//   resolve("resovle1");
+//   resolve("resolve2");
+// })
+//   .then((res) => {
+//     console.log(res);
+//     setTimeout(() => {
+//       console.log(p1);
+//     }, 1000);
+//   })
+//   .finally((res) => {
+//     console.log("finally", res);
+//   });
+
+// 8.1 使用Promise实现每隔1秒输出1,2,3
+const arr = [1, 2, 3];
+
+// reduce
+// arr.reduce((p, c) => {
+//   return p.then(() => {
+//     return new Promise((r) => {
+//       setTimeout(() => {
+//         r(console.log(c));
+//       }, 1000);
+//     });
+//   });
+// }, Promise.resolve());
+
+// map
+function test() {
+  list.reduce((p, c, i) => {
+    return p
+      .then(() => {
+        return square(c);
+      })
+      .then((val) => {
+        console.log(val);
+      });
+  }, Promise.resolve());
 }
-function runReject(x) {
-  const p = new Promise((res, rej) =>
-    setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x)
-  );
-  return p;
-}
-Promise.race([runReject(0), runAsync(1), runAsync(2), runAsync(3)])
-  .then((res) => console.log("result: ", res))
-  .catch((err) => console.log(err));
+test();

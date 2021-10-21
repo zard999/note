@@ -140,3 +140,9 @@ Object.is(+0, -0) //false
 Promise：异步问题同步化解决方案(最优解)
 为什么 Promise 执行时同步，p.then 是异步
 ajax 分离出来的程序，要设置 async 为 false，但是分离出来之后还是会阻塞后面的程序
+
+#### async 和 await
+
+- await 后面的 promise 函数如果没有返回成功的 promise 函数，则会一直等待
+- await 下面的语句等同步代码执行完后优先于微任务执行
+- 如果在 async 函数中抛出了错误，则终止错误，不会向下继续执行
