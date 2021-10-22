@@ -12,24 +12,24 @@ const square = (num) => {
   });
 };
 
-async function test() {
-  list.forEach((x) => {
-    const res = await square(x);
-    console.log(res); //1 4 9
-  });
-}
+// async function test() {
+//   list.forEach((x) => {
+//     const res = await square(x);
+//     console.log(res); //1 4 9
+//   });
+// }
 
 function test() {
-    list.reduce((p, c, i) => {
-      return p
-        .then(() => {
-          return square(c);
-        })
-        .then((val) => {
-          console.log(val);
-        });
-    }, Promise.resolve());
-  }
+  list.reduce((p, c) => {
+    return p
+      .then(() => {
+        return square(c);
+      })
+      .then((val) => {
+        console.log(val);
+      });
+  }, Promise.resolve());
+}
 test();
 
 //
