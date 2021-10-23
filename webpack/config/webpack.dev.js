@@ -62,7 +62,7 @@ module.exports = {
 
   // 插件配置(只要是插件，必须要引入)
   plugins: [
-    // eslint格式检查
+    // eslint格式检查,webpack里的eslint只是执行，并没有详细配置
     new ESLintPlugin(),
 
     // 打包html
