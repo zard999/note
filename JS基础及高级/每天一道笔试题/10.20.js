@@ -3,33 +3,44 @@
 const list = [1, 2, 3];
 
 const square = (num) => {
-  //1
   return new Promise((res, rej) => {
     setTimeout(() => {
-      //h
       res(num * num);
     }, 1000);
   });
 };
 
-// async function test() {
-//   list.forEach((x) => {
-//     const res = await square(x);
-//     console.log(res); //1 4 9
-//   });
-// }
-
-function test() {
+async function test() {
   list.reduce((p, c) => {
-    return p
-      .then(() => {
-        return square(c);
-      })
-      .then((val) => {
-        console.log(val);
+    return p.then(() => {
+      return new Promise((r) => {
+        r(
+          square(c).then((val) => {
+            console.log(val);
+          })
+        );
       });
+    });
   }, Promise.resolve());
 }
 test();
+// for (let i = 0; i < list.length; i++) {
+//   (async function test(x) {
+//     const res = await square(x);
+//     console.log(res); //1 4 9
+//   })();
+// }
+
+// function test() {
+//   list.reduce((p, c) => {
+//     return p
+//       .then(() => {
+//         return square(c);
+//       })
+//       .then((val) => {
+//         console.log(val);
+//       });
+//   }, Promise.resolve());
+// }
 
 //
