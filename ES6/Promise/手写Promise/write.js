@@ -1,61 +1,46 @@
 function MyPromise(executor) {
   const _this = this;
-  _this.statu = "pending";
+
+  _this.state = "pending";
   _this.result = undefined;
+
   function resolve(value) {
-    if (_this.statu === "pending") {
-      return;
-    }
-    _this.statu = "fulfilled";
+    if (_this.state !== "pending") return;
+
+    _this.state = "fulfilled";
     _this.result = value;
+
     setTimeout(() => {
-      this.onFulfilled && _this.onFulfilled(value);
+      _this.onResolved && _this.onResolved(value);
     });
   }
 
-  function reject(value) {
-    if (_this.statu === "pending") {
-      return;
-    }
-    _this.statu = "rejected";
-    _this.result = value;
+  function reject(reason) {
+    if (_this.state !== "pending") return;
+
+    _this.state = "rejected";
+    _this.result = reason;
+
     setTimeout(() => {
-      _this.onRejected && _this.onRejected();
+      _this.onRejected && _this.onRejected(reason);
     });
   }
+
   executor(resolve, reject);
 }
 
-MyPromise.prototype.then = function (onFulfilled, onRejected) {
+MyPromise.prototype.then = function (onResolved, onRejected) {
   const _this = this;
+
   return new MyPromise((resolve, reject) => {
-    _this.onFulfilled = function (value) {
+    _this.onResolved = function (value) {
       try {
-        const result = onFulfilled(value);
+        const result = onResolved(value);
+
         if (result instanceof MyPromise) {
           result.then(
             (val) => {
               resolve(val);
-            },
-            (reason) => {
-              reject(reason);
-            }
-          );
-        } else {
-          resolve(result);
-        }
-      } catch (e) {
-        reject(e);
-      }
-    };
-
-    _this.onRejected = function (reason) {
-      try {
-        const result = onRejected(reson);
-        if (result instanceof MyPromise) {
-          result.then(
-            (val) => {
-              resolve(value);
             },
             (rea) => {
               reject(rea);
@@ -68,17 +53,38 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
         reject(e);
       }
     };
+
+    _this.onRejected = function (value) {
+      try {
+        const result = onRejected(value);
+
+        if (result instanceof MyPromise) {
+          result.then(
+            (val) => {
+              resolve(val);
+            },
+            (rea) => {
+              reject(rea);
+            }
+          );
+        }
+        elseP;
+        resolve(result);
+      } catch (e) {
+        reject(e);
+      }
+    };
   });
 };
 
-MyPromise.prototype.catch = function (onFulfilled) {
+MyPromise.prototype.catch = function (onResolved) {
   return this.then(null, onRejected);
 };
 
-MyPromise.prototype.finally = function (onFulfilled) {
+MyPromise.prototype.finally = function (onResolved) {
   return this.then(
     (val) => {
-      const result = onFulfilled();
+      const result = onResolved();
       if (result instanceof MyPromise) {
         return result.then(
           (val) => {
@@ -89,11 +95,11 @@ MyPromise.prototype.finally = function (onFulfilled) {
           }
         );
       } else {
-        return val;
+        throw val;
       }
     },
     (rea) => {
-      const result = onFulfilled();
+      const result = onResolved();
       if (result instanceof MyPromise) {
         return result.then(
           (val) => {
@@ -110,8 +116,8 @@ MyPromise.prototype.finally = function (onFulfilled) {
   );
 };
 
-MyPromise.prototype.resolve = function (info) {
-  return new Promise((resolve, reject) => {
+MyPromise.resolve = function (info) {
+  return new MyPromise((resolve, reject) => {
     if (info instanceof MyPromise) {
       info.then(
         (val) => {
@@ -127,21 +133,23 @@ MyPromise.prototype.resolve = function (info) {
   });
 };
 
-MyPromise.prototype.reject = function (info) {
+MyPromise.reject = function (info) {
   return new MyPromise((resolve, reject) => {
     reject(info);
   });
 };
 
-MyPromise.all = function (allPromise) {
-  let count = 0;
-  let arr = [];
+MyPromise.prototype.all = function (allPromise) {
   return new MyPromise((resolve, reject) => {
+    let count = 0;
+    let arr = [];
+
     allPromise.forEach((item, index) => {
       item.then(
         (val) => {
           count++;
           arr[index] = val;
+
           if (count === arr.length) {
             resolve(arr);
           }
@@ -155,12 +163,15 @@ MyPromise.all = function (allPromise) {
 };
 
 MyPromise.prototype.allSettled = function (allPromise) {
-  return new Promise((resolve, reject) => {
+  return new MyPromise((resolve, reject) => {
+    let count = 0;
+    let arr = [];
     allPromise.forEach((item, index) => {
       item.then(
         (val) => {
           count++;
           arr[index] = item;
+
           if (count === arr.length) {
             resolve(arr);
           }
@@ -168,6 +179,7 @@ MyPromise.prototype.allSettled = function (allPromise) {
         (rea) => {
           count++;
           arr[index] = item;
+
           if (count === arr.length) {
             resolve(arr);
           }
