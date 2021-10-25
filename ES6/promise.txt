@@ -1,0 +1,43 @@
+什么是promise
+	promise对象是异步问题同步化的一个解决方案,解决了回调地域
+			
+promise的使用
+	1.是什么: promise是一个构造函数,参数是一个回调函数,解决了异步的问题,但promise本身不是异步的,
+	2.实例化传递回调函数的参数: promise实例化时传递的实例化对象,接收两个参数,一个是resolve,一个是reject,
+	
+promise的实例化对象
+	1. pormiseState:当前promise实例化对象的状态,
+	2. promiseResult:当前promise实例化对象的值,
+	
+promise实例化对象的状态:
+	1. pending: 正在执行异步代码(默认状态)
+	2. fulfilled: 成功(在Promise的回调函数中调用了resolve方法)
+	3. rejected: 失败(在Promise的回调函数中调用了reject方法)
+	4. promise对象的状态只能从pending转为其他状态
+	
+then的返回值
+	promise的原型对象方法: then,catch,finally,
+	
+	then方法: 
+		1. then方法是异步的,当实例化的promise对象不再是pending状态时调用
+		2. 因为then是解决异步嵌套的核心流程,所以then方法一定返回的是promise对象
+		
+	then的返回值:
+		成功的promise对象调用then:
+			1. then中一般接收一个回调函数作为参数,回调函数内部用来处理下一步操作
+			2. then默认返回的是一个成功的promise对象,promise对象的值就是当前回调函数的返回值
+			3. 当then中返回的是一个promise对象的时候,then返回的promise对象的状态和值就是回调函数的状态和值.
+			4. 当then的回调函数内部出现报错并且没有异常处理,则直接返回失败的promise对象,值为这个错误
+			5. then中值传递一个值,会直接发生值穿透,then返回成功状态的promise对象,值是调用then的promise对象的值.
+		失败的promise对象调用then:
+			1. then直接返回一个失败的promise对象,并且值是调用then的那个失败的promise对象的值.
+	
+
+catch:
+	1. catch是处理失败的
+	2. catch的返回值: 当失败的promise对象调用catch方法同成功调用then一样,
+
+finally的返回值:
+	1. 只有finally中的回调函数返回失败的promise时,finally才会返回失败状态的promise对象,值为回调函数返回promise对象的值.
+	2. finally报错则返回失败,值为报错
+	3. 其他情况都是值穿透

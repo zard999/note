@@ -1,0 +1,33 @@
+- all allSettled race any方法解释
+	Promise.all():
+		1. 参数一般是一个数组,里面放入一个或多个promise对象
+		2. 返回值:默认是一个promise对象
+			- 默认是pending状态
+			- 只有all中所有的promise对象全部成功,all才返回fulfilled状态,值是所有promise对象组成的数组
+			- 只要有一个返回失败状态,all直接返回失败状态,值是失败的值
+
+	Promise.allSettled():
+		1. 只会返回成功的promise对象,值是所有的promise对象的状态和值组成的数组
+	
+	Promise.race():
+		1. race返回第一个改变状态的promise对象,值就是这个对象的值
+		
+	Promise.any():
+		1. 全部失败,返回失败且报错
+		2. 只要有一个成功,any返回第一个成功的promise对象,值为这个对象的值
+
+- Promise.resolve和Promise.reject方法
+	Promise.resolve(value):
+		1. 快速得到一个成功得promise对象,值为value
+		2. 如果value是一个promise对象,则resolve返回得promise对象得状态和值跟随value
+	Promise.reject(reason):
+		1. 快速得到一个失败得promise对象,值为reason
+		2. 不管reason是什么对象,都会返回失败的promise对象的值
+
+- async和await是什么？以及- 返回值
+	是什么:
+		1. async声明一个function是异步的,await等待一个异步方法执行完成
+		2. async(源自ES2017-ES8), 真正意义上去解决异步回调问题,是Generator的语法糖
+		3. await只能等待promise对象
+	返回值:
+		1. 当await等待的promise对象成功,则await的返回值就是这个成功的promise对象的值
