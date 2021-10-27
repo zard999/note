@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class Demo extends React.Component {
+        inp = React.createRef();
+        render() {
+          console.log(this);
+          return (
+            <div>
+              <input type="text" ref={this.inp} />
+              <br />
+              <button onClick={this.showIpt1}>点击我弹出上边输入框内容</button>
+              <br />
+              <input
+                type="text"
+                onBlur={this.showMsg}
+                placeholder="失去焦点的时候弹出输入内容"
+              />
+            </div>
+          );
+        }
+
+        showIpt1 = () => {
+          alert(this.inp.current.value);
+        };
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
