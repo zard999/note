@@ -13,31 +13,30 @@
     <div id="test"></div>
 
     <script type="text/babel">
-      class Demo extends React.Component {
-        inp = React.createRef();
+      /* 
+      1. 字符串
+      2. 回调函数
+      3. 调用React.createRef方法创建构造器
+     */
+      class UserInfo extends React.Component {
+        inpEl = React.createRef();
+
+        showInfo = () => {
+          let { current: input } = this.inpEl;
+          console.log(input.value);
+        };
         render() {
-          console.log(this);
           return (
             <div>
-              <input type="text" ref={this.inp} />
+              <input type="text" ref={this.inpEl} />
               <br />
-              <button onClick={this.showIpt1}>点击我弹出上边输入框内容</button>
-              <br />
-              <input
-                type="text"
-                onBlur={this.showMsg}
-                placeholder="失去焦点的时候弹出输入内容"
-              />
+              <button onClick={this.showInfo}>增加</button>
             </div>
           );
         }
-
-        showIpt1 = () => {
-          alert(this.inp.current.value);
-        };
       }
 
-      ReactDOM.render(<Demo />, document.getElementById("test"));
+      ReactDOM.render(<UserInfo />, document.getElementById("test"));
     </script>
   </body>
 </html>

@@ -67,8 +67,6 @@ undefined 和 null 是不能进行隐式转换的，会报错
 函数的形参赋了值就不会算在 length 中，如果放在第一位，length 为 0
 一旦给了形参默认值，arugments 和形参的映射就不存在了
 
-#### fetch
-
 #### 箭头函数
 
 1. this 由外层的函数的作用域来决定(call 并不能改变箭头函数的 this)

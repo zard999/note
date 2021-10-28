@@ -8,62 +8,85 @@
     <script src="../js/react.development.js"></script>
     <script src="../js/react-dom.development.js"></script>
     <script src="../js/babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
   </head>
   <body>
     <div id="test"></div>
 
     <script type="text/babel">
-      class Fruit extends React.Component {
+      // 创建学习类
+      class Study extends React.Component {
         state = {
-          inputValue: "",
-          list: ["苹果", "香蕉", "鸭梨", "橘子", "橙子"],
+          // inpValue: "",
+          list: [],
         };
 
-        changeInput(e) {
-          this.setState({
-            inputValue: e.target.value,
-          });
-        }
+        // inpEl = React.createRef();
 
-        deleteItem(index) {
-          let list = this.state.list;
+        addList = () => {
+          // let { current: input } = this.inpEl;
+          let { list } = this.state;
+          {
+            /* 修改state对象中的list数组 */
+          }
+          this.setState({
+            list: [...list, this.inpEl.value],
+          });
+        };
+
+        deleteItem = (index) => {
+          let { list } = this.state;
           list.splice(index, 1);
           this.setState({
             list: list,
           });
-        }
+        };
 
-        addList() {
-          this.setState({
-            list: [...this.state.list, this.state.inputValue],
-          });
+        componentWillMount() {
+          axios
+            .post(
+              "https://www.fastmock.site/mock/1067b8b6cb8580eddf730b26f9008bdb/test01/fuwu?data=data"
+            )
+            .then((res) => {
+              // console.log(
+              //   "axios 请求数据成功：" + JSON.stringify(res.data.data)
+              // );
+              let { list } = this.state;
+              console.log(list);
+              let data = JSON.parse(JSON.stringify(res.data.data));
+              this.setState({
+                list: data,
+              });
+            })
+            .catch((err) => {
+              console.error("axios 请求失败：" + err);
+            });
         }
 
         render() {
-          const Fragment = React.Fragment;
           return (
-            <Fragment>
+            <div>
               <div>
-                <input type="text" onChange={(e) => this.changeInput(e)} />
-                <button onClick={() => this.addList()}>增加服务</button>
+                {/* 添加ref记录input输入的值 */}
+                <input type="text" ref={(el) => (this.inpEl = el)} />
+                <button onClick={this.addList}>下一步修炼</button>
               </div>
               <ul>
                 {this.state.list.map((item, index) => {
                   return (
-                    <li key={index} onClick={() => this.deleteItem(index)}>
+                    <li key={index} onClick={this.deleteItem}>
                       {item}
                     </li>
                   );
                 })}
               </ul>
-            </Fragment>
+            </div>
           );
         }
       }
 
-      ReactDOM.render(<Fruit />, document.getElementById("test"));
+      // 渲染数据
+      ReactDOM.render(<Study />, document.getElementById("test"));
     </script>
   </body>
 </html>
-
-
