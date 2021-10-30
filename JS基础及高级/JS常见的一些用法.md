@@ -621,4 +621,6 @@ Pointfree style means never having to say your data
 
 #### 高阶函数
 
+参数包含一个函数或者返回值为一个函数
+
 JS++从 25 章开始

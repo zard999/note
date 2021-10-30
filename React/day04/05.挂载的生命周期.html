@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class Demo extends React.Component {
+        componentWillMount() {
+          console.log("****componentWillMount");
+        }
+
+        render() {
+          console.log("****render执行****");
+          return (
+            <div>
+              <h2></h2>
+              <button onClick={this.unMount}>卸载</button>
+            </div>
+          );
+        }
+
+        componentDidMount() {
+          console.log("****componentDidMount****");
+        }
+
+        componentWillUnmount() {
+          console.log("****componentWillUnmount****");
+        }
+        unMount = () => {
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+        };
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

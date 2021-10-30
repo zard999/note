@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>index</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      /*
+            FilterableProductTable(橙色): 是整个实例应用的整体
+            SearchBar(蓝色): 接受所有的用户的输入
+            ProductTable(绿色): 展示数据内容并根据用户输入筛选结果
+            ProductCategoryRow(天蓝色): 为每一个产品类别展示标题
+            ProductRow(红色): 每一行展示一个产品
+         */
+
+      function ProductRow(props) {
+        return (
+          <div className="item-wrap clearfix">
+            <div className="item-name">{props.name}</div>
+            <div className="item-price">{props.price}</div>
+          </div>
+        );
+      }
+
+      function ProductCategoryRow(props) {
+        return <div className="table-tt">{props.category}</div>;
+      }
+
+      class ProductTable extends React.Component {
+        state = {
+          data: [
+            {
+              category: "Sporting Goods",
+              price: "$49.99",
+              stocked: true,
+              name: "Football",
+            },
+            {
+              category: "Sporting Goods",
+              price: "$9.99",
+              stocked: true,
+              name: "Baseball",
+            },
+            {
+              category: "Sporting Goods",
+              price: "$29.99",
+              stocked: false,
+              name: "Basketball",
+            },
+            {
+              category: "Electronics",
+              price: "$99.99",
+              stocked: true,
+              name: "iPod Touch",
+            },
+            {
+              category: "Electronics",
+              price: "$399.99",
+              stocked: false,
+              name: "iPhone 5",
+            },
+            {
+              category: "Electronics",
+              price: "$199.99",
+              stocked: true,
+              name: "Nexus 7",
+            },
+          ],
+          list: [],
+        };
+
+        render() {
+          const { list } = this.state;
+          this.state.data.forEach((item, index) => {
+            list.push(item.category);
+          });
+          const arr = [...new Set(list)];
+          console.log(arr);
+
+          return (
+            <div className="table-wrap">
+              <span className="name">Name</span>
+              <span className="price">Price</span>
+              {arr.forEach((item, index) => {
+                return <ProductCategoryRow category={item} />;
+              })}
+              <ul>
+                {this.state.data
+                  .filter((item, index) => {
+                    return item.category === "Sporting Goods";
+                  })
+                  .map((item, index) => {
+                    return (
+                      <ProductRow
+                        key={index}
+                        name={item.name}
+                        price={item.price}
+                      />
+                    );
+                  })}
+              </ul>
+
+              <ProductCategoryRow />
+              <ul>
+                {this.state.data
+                  .filter((item, index) => {
+                    return item.category === "Electronics";
+                  })
+                  .map((item, index) => {
+                    return (
+                      <ProductRow
+                        key={index}
+                        name={item.name}
+                        price={item.price}
+                      />
+                    );
+                  })}
+              </ul>
+            </div>
+          );
+        }
+      }
+
+      class SearchBar extends React.Component {
+        render() {
+          return (
+            <div className="search-item">
+              <input type="text" className="inp" placeholder="Search..." />
+              <br />
+              <input type="checkbox" />
+              <span>Only show products in stock</span>
+            </div>
+          );
+        }
+      }
+
+      class FilterableProductTable extends React.Component {
+        render() {
+          return (
+            <div className="search-wrap">
+              <SearchBar />
+              <ProductTable />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <FilterableProductTable />,
+        document.getElementById("test")
+      );
+    </script>
+  </body>
+</html>

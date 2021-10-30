@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>06.父子组件的生命周期</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class Parent extends React.Component {
+        state = {
+          car: "lsls",
+        };
+
+        render() {
+          return (
+            <div>
+              <h2>父组件的车为：{this.state.car}</h2>
+              <Child car={this.state.car} />
+              <button onClick={this.changeCar}>改变</button>
+            </div>
+          );
+        }
+
+        changeCar = () => {
+          this.setState({
+            car: "bt",
+          });
+        };
+      }
+
+      class Child extends React.Component {
+        componentWillReciveProps() {
+          console.log("****componentWillReciveProps****");
+        }
+
+        shouldComponentUpdate() {
+          console.log("****shouldComponentUpdate*****");
+          return true;
+        }
+
+        componentWillUpdate() {
+          console.log("****componentWillUpdate****");
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>子组件的车为：{this.props.car}</h2>
+            </div>
+          );
+        }
+
+        componentDidUpdate() {
+          console.log("****componentDidUpdate*****");
+        }
+      }
+
+      ReactDOM.render(<Parent />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

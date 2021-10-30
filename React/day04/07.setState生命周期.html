@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07.setState生命周期</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+  </head>
+  <body>
+    <did id="test"></did>
+
+    <script type="text/babel">
+      class Demo extends React.Component {
+        state = {
+          value: "哈哈",
+        };
+        shouldComponentUpdate() {
+          console.log("****shouldComponentUpdate****");
+          return true;
+        }
+
+        componentWillUpdate() {
+          console.log("****componentWillUpdate****");
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>{this.state.value}</h2>
+              <button onClick={this.changeValue}>改变</button>
+            </div>
+          );
+        }
+
+        componentDidUpdate() {
+          console.log("****componentDidUpdate****");
+        }
+
+        changeValue = () => {
+          this.setState({
+            value: "kjkjk",
+          });
+        };
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
