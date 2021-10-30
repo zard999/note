@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02.getSnapshotBeforeUpdate</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class Demo extends React.Component {
+        render() {
+          return <div></div>;
+        }
+
+        getSnapshotBeforeUpdate() {
+          console.log("快照 getSnapshotBeforeUpdate");
+        }
+
+        componentDidUpdate(prevProps, prevState, snapshpt) {
+          console.log(prevProps, prevState, snapshot);
+        }
+
+        componentWillUnmount() {
+          console.log("conponentWillUnmount");
+        }
+
+        getSnapshotBeforeUpdate(prevProps, prevState, snapshot) {
+          console.log(prevProps, prevState, snapshot);
+        }
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
