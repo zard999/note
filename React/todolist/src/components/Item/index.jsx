@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import "./index.css";
 export default class Item extends Component {
   render() {
-    const { content, id, done } = this.props;
+    const { content, done } = this.props;
     return (
       <li>
         <label>
-          <input type="checkbox" checked={done} />
+          <input type="checkbox" checked={done} onChange={this.changeChecked} />
           <span>{content}</span>
         </label>
         <button className="btn btn-danger" style={{ display: "none" }}>
@@ -15,4 +15,9 @@ export default class Item extends Component {
       </li>
     );
   }
+
+  changeChecked = (e) => {
+    const { changeDone, done, id } = this.props;
+    changeDone(id, done);
+  };
 }
