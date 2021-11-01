@@ -1,15 +1,5 @@
-import React, { Component, Fragment } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import ToDoList from "./todoList";
-
-class App extends Component {
-  render() {
-    return (
-      <Fragment>
-        <ToDoList />
-      </Fragment>
-    );
-  }
-}
+import App from "./App";
 
 ReactDOM.render(<App />, document.getElementById("root"));
