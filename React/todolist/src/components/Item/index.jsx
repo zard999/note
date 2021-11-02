@@ -1,55 +1,28 @@
 import React, { Component } from "react";
 import "./index.css";
-
-// 引入store仓库
-import store from "../../store";
-
 export default class Item extends Component {
-  state = store.getState();
-
-  storeChange = () => {
-    this.setState(store.getState());
-  };
-
-  handleMouse = (flag) => {
-    return () => {
-      const action = {
-        type: "mouse_flag",
-        flag,
-      };
-      store.dispatch(action);
-    };
-  };
-
   render() {
+    //拿到List组件传递的当前信息
     const { content, done } = this.props;
-    const { mouse } = this.state;
     return (
-      <li
-        style={{ backgroundColor: mouse ? "#999" : "white" }}
-        onMouseEnter={this.handleMouse(true)}
-        onMouseLeave={this.handleMouse(false)}
-      >
+      <li>
         <label>
           <input type="checkbox" checked={done} onChange={this.changeChecked} />
           <span>{content}</span>
         </label>
-        <button
-          className="btn btn-danger"
-          style={{ display: mouse ? "block" : "none" }}
-        >
+        <button className="btn btn-danger" style={{ display: "none" }}>
           删除
         </button>
       </li>
     );
   }
 
-  componentDidMount() {
-    store.subscribe(this.storeChange);
-  }
-
   changeChecked = (e) => {
-    const { changeDone, done, id } = this.props;
+    const { done, changeDone, id } = this.props;
+    // console.log("changeChecked");
+
+    //调用App的changeDone方法，把自己当前的状态传递过去
+    //调用的时候 还要传递当前点击的item的id，方便App组件进行判断当前点的是哪一个
     changeDone(id, done);
   };
 }
