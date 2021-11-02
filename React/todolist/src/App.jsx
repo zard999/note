@@ -28,7 +28,11 @@ class App extends Component {
             changeDone={this.changeDone}
             deleteTodo={this.deleteTodo}
           />
-          <Footer />
+          <Footer
+            deleteAllTodo={this.deleteAllTodo}
+            todos={todos}
+            checkAll={this.checkAll}
+          />
         </div>
       </div>
     );
@@ -60,8 +64,28 @@ class App extends Component {
 
   deleteTodo = (id) => {
     const { todos } = this.state;
+    const newTodos = todos.filter((item) => item.id !== id);
+    this.setState({
+      todos: newTodos,
+    });
+  };
+
+  // 删除所有已完成
+  deleteAllTodo = () => {
+    const { todos } = this.state;
     const newTodos = todos.filter((item) => {
-      return item.id !== id;
+      return !item.done;
+    });
+    this.setState({
+      todos: newTodos,
+    });
+  };
+
+  // 全选
+  checkAll = (flag) => {
+    const { todos } = this.state;
+    const newTodos = todos.map((item) => {
+      return { ...item, done: flag };
     });
     this.setState({
       todos: newTodos,
