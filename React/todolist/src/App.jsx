@@ -2,7 +2,9 @@ import { Component } from "react";
 import About from "./components/About";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import { Link, Route } from "react-router-dom";
+// NavLink专门做导航,相对于Link来说，多了一些属性，如activeClassName
+import { Route } from "react-router-dom";
+import MyLink from "./components/MyLink";
 
 class App extends Component {
   render() {
@@ -13,16 +15,9 @@ class App extends Component {
           <div className="col-xs-2 col-xs-offset-2">
             <div className="list-group">
               {/* 在react，Link组件完成路径切换,to属性是切换路径 */}
-              <Link
-                to="/about"
-                className="list-group-item active"
-                href="./about.html"
-              >
-                About
-              </Link>
-              <Link to="/home" className="list-group-item" href="./home.html">
-                Home
-              </Link>
+              {/* 当自定义组件是双标签时， 内容是通过props的children传递的*/}
+              <MyLink to="/home">Home</MyLink>
+              <MyLink to="/about">About</MyLink>
             </div>
           </div>
           <div className="col-xs-6">
