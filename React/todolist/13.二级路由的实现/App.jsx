@@ -3,7 +3,7 @@ import About from "./pages/About";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 // NavLink专门做导航,相对于Link来说，多了一些属性，如activeClassName
-import { Route, Switch } from "react-router-dom";
+import { Route} from "react-router-dom";
 import MyLink from "./components/MyLink";
 /*
   组件的分类：
