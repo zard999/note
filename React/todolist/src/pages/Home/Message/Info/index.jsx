@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 // 可以处理查询字符串的插件
-import qs from "qs";
 
 export default class Info extends Component {
   render() {

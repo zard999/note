@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Info from "./Info";
 import { Link, Route } from "react-router-dom";
-import qs from "qs";
 
 export default class Message extends Component {
   state = {
