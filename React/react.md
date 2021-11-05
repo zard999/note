@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-27 09:20:17
- * @LastEditTime: 2021-11-05 10:37:10
+ * @LastEditTime: 2021-11-05 11:22:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \note\React\react.md
@@ -45,6 +45,12 @@ onkeyup
 - 存放的文件夹位置不同。一般组件:components;路由组件:pages。
 - 接受的 props 参数不同。一般组件:传递什么接受什么;路由组件:收到固定的几个。
 
+#### 路由传值的方式
+
+- params：在路由的地址后继续添加 params 参数,在 Route 组件中接受 params 参数 /:xx/:xx,在路由组件中，通过 this.props.match.params 即可拿到传递的信息
+- search(用 qs 插件): to 属性里面写对象,对象的 pathname 写路径,search 写 qs.stringify(item)
+- state: to 属性里面也是写对象,对象里的 state 直接写当前 item
+
 #### 编程式路由导航
 
 - props 上的 history 对象上有 push 和 replace 方法，可以进行路由导航
@@ -53,9 +59,9 @@ onkeyup
 
 #### 历史记录前进和回退
 
-- 路由组件的 props 上的 history 对象
+- 路由组件的 props 上的 history 对象 中 有 goForward 和 goBack 和 go 等方法
 - withRouter 可以把一般组件作为路由组件使用，拥有固定的 props
 
 #### 默认重定向
 
-- 设置 Redirect 标签中的 to 属性
+- 设置 Redirect 标签中的 to 属性为默认的路由路径
