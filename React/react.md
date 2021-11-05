@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-27 09:20:17
- * @LastEditTime: 2021-11-05 11:22:07
+ * @LastEditTime: 2021-11-05 16:59:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \note\React\react.md
@@ -65,3 +65,18 @@ onkeyup
 #### 默认重定向
 
 - 设置 Redirect 标签中的 to 属性为默认的路由路径
+
+#### redux
+
+1. 创建一个 store.js, createStore(),里面放 reducer 函数
+
+#### 异步 action
+
+- 异步 action 函数必须返回一个函数，store 可以执行这个函数，这个函数里必须再次 store.dispatch 一次才能和 reducer 联系
+- 必须引入 redux-thunk 中间件，createStore 中第二个参数填 applyMiddleware(thunk),store 才能执行函数
+
+#### react-redux
+
+- 容器组件和 UI 组件
+
+1. 引入 UI 组件，通过 connect 创建容器组件和用来连接 UI 组件的 redux
