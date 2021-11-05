@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-27 09:20:17
- * @LastEditTime: 2021-11-05 16:59:40
+ * @LastEditTime: 2021-11-05 19:13:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \note\React\react.md
@@ -53,14 +53,17 @@ onkeyup
 
 #### 编程式路由导航
 
-- props 上的 history 对象上有 push 和 replace 方法，可以进行路由导航
+- 路由组件的 props 上的 history 对象上有 push 和 replace 方法，可以进行路由导航
 - 参数一是路由地址，参数二是 state 值
 - push 和 replace 的区别在于是否存在历史记录
+
+#### withRouter
+
+- withRouter 方法可以把一般组件变成路由组件拥有固定的 props 属性值
 
 #### 历史记录前进和回退
 
 - 路由组件的 props 上的 history 对象 中 有 goForward 和 goBack 和 go 等方法
-- withRouter 可以把一般组件作为路由组件使用，拥有固定的 props
 
 #### 默认重定向
 
@@ -68,12 +71,20 @@ onkeyup
 
 #### redux
 
-1. 创建一个 store.js, createStore(),里面放 reducer 函数
+1. 创建一个 store 对象：将 state、action、reducer 联系在一起的对象
+   - import {createStore} from 'redux'
+   - import reducer from './reducers'
+   - const store = createStore()
+2. 此对象的功能：
+   - store.getState(): 得到 state
+   - store.dispatch(action): 分发 action，触发 reducer 调用，产生新的 state
+   - store.subscribe(listener): 注册监听，当产生新的 state 时，自动调用
 
 #### 异步 action
 
-- 异步 action 函数必须返回一个函数，store 可以执行这个函数，这个函数里必须再次 store.dispatch 一次才能和 reducer 联系
+- 异步 action 函数必须返回一个函数，并且函数是让 store 调用的，但是 store 还是希望这个函数中有 dispatch，否则无法和 reducer 联系
 - 必须引入 redux-thunk 中间件，createStore 中第二个参数填 applyMiddleware(thunk),store 才能执行函数
+- 在 store 调用异步 action 返回的函数时，就已经传入 dispatch 方法，所以不需要重新获取，给函数传个形参即可
 
 #### react-redux
 
