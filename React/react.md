@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-27 09:20:17
- * @LastEditTime: 2021-11-05 09:53:18
+ * @LastEditTime: 2021-11-05 10:37:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \note\React\react.md
@@ -50,3 +50,12 @@ onkeyup
 - props 上的 history 对象上有 push 和 replace 方法，可以进行路由导航
 - 参数一是路由地址，参数二是 state 值
 - push 和 replace 的区别在于是否存在历史记录
+
+#### 历史记录前进和回退
+
+- 路由组件的 props 上的 history 对象
+- withRouter 可以把一般组件作为路由组件使用，拥有固定的 props
+
+#### 默认重定向
+
+- 设置 Redirect 标签中的 to 属性
