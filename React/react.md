@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-27 09:20:17
- * @LastEditTime: 2021-11-05 19:13:54
+ * @LastEditTime: 2021-11-06 11:16:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \note\React\react.md
@@ -42,7 +42,7 @@ onkeyup
 #### 路由组件和一般组件的区别
 
 - 使用方式不同。一般组件直接用标签去渲染;路由组件依赖路由器进行路径的匹配。
-- 存放的文件夹位置不同。一般组件:components;路由组件:pages。
+- 存放的文件夹 s 位置不同。一般组件:components;路由组件:pages。
 - 接受的 props 参数不同。一般组件:传递什么接受什么;路由组件:收到固定的几个。
 
 #### 路由传值的方式
@@ -88,6 +88,12 @@ onkeyup
 
 #### react-redux
 
-- 容器组件和 UI 组件
+容器组件和 UI 组件
 
-1. 引入 UI 组件，通过 connect 创建容器组件和用来连接 UI 组件的 redux
+1. 创建 container 文件夹用来放容器组件，引入 UI 组件，通过 connect 创建容器组件和用来连接 UI 组件的 redux。 const countContainer = connect(mapStateToProps, mapDispatchToProps)('UI 组件')
+2. connect 方法的第一个参数函数，当 react-redux 调用这个函数的时候，会直接传入当前 store 中的 state 状态值
+3. connect 方法的第二个参数函数，当 react-redux 调用这个函数的时候，会直接传入 dispatch 作为参数
+4. mapDispatchToProps 可以简写 const mapDispatchToProps = {
+   increment: createIncrementAction,
+   }
+5. 容器组件和 UI 组件和写在一起
