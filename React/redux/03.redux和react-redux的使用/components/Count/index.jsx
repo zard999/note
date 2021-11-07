@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2021-11-05 17:55:03
- * @LastEditTime: 2021-11-06 12:30:45
+ * @LastEditTime: 2021-11-06 14:06:32
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \note\React\redux\src\components\Count\index.jsx
  */
 
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 // 引入action
 import {
   createIncrementAction,
@@ -90,7 +90,6 @@ const mapStateToProps = (state) => ({ sum: state });
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ increment, decrement }, dispatch);
 // }// }
-
 
 const mapDispatchToProps = {
   increment: createIncrementAction,
