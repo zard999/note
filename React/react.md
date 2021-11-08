@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-27 09:20:17
- * @LastEditTime: 2021-11-06 11:16:10
+ * @LastEditTime: 2021-11-08 23:31:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \note\React\react.md
@@ -97,3 +97,39 @@ onkeyup
    increment: createIncrementAction,
    }
 5. 容器组件和 UI 组件和写在一起
+
+#### hook 中的常见方法
+
+- useState: 让函数组件具有维持状态的能力(管理 state)
+  - useState(initialState)的参数时创建 state 的初始值，它可以是任意类型，比如数字、对象、数组等等
+  - useState()的返回值是一个有着两个元素的数组。第一个数组元素用来读取 state 的值，第二个则是用来设置这个 state 的值。注意，state 的变量是只读的，只能通过数组的第二个参数来设置它的值
+  - 如果要创建多个 state，那么我们就需要多次调用 useState
+  - state 中永远不要保存可以通过计算得到的值
+- useEffect：指向副作用，副作用是指一段和当前执行结果无关的代码，如修改函数外部的某个变量，要发起一个请求等等。useEffect 中代码的执行是不影响渲染出来的 UI 的
+  - 每次 render 后执行：不提供第二个依赖性参数。比如，useEffect(() => {})
+  - 仅第一次 render 后执行：提供一个空数组作为依赖性。比如，useEffect(() => {}, [])
+  - 第一次以及依赖性发生变化后执行：提供依赖项数组。比如，useEffect(() => {}, [deps])
+  - 组件 unmount 后执行：返回一个回调函数。比如，useEffect(() => { return () => {} }, [])
+
+#### hook 必须避免的错误
+
+1. 在 useEffect 的回调函数中使用的变量，都必须在依赖项中声明
+2. Hooks 不能出现在条件语句或者循环中，也不能出现在 return 之后
+3. Hooks 只能在函数组件或者自定义 Hooks 中使用
+4. ESLint 插件：npm i eslint-plugin-react-hooks -D
+
+```ESLint
+{
+   "plugins": [
+      // ...
+      "react-hooks"
+   ],
+   "rules": {
+      // ...
+      // 检查Hooks的使用规则
+      "react-hooks/rules-of-hooks": "error",
+      // 检查依赖性的声明
+      "react-hooks/exhaustive-deps": "warn"
+   }
+}
+```
