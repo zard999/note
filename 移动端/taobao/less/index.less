@@ -1,0 +1,123 @@
+@picWidth: 640;
+.rem(@type,@num){
+    @{type}: @num / @picWidth * 16rem
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.w{
+    .rem(width, 600);
+    margin: 0 auto;
+}
+
+html{
+    font-size: (414/16px);
+}
+
+.header{
+    display: flex;
+    .rem(height, 40);
+    .rem(margin-top, 10);
+    justify-content: space-between;
+
+    .logo{
+        .rem(width, 50);
+        background-color: orange;
+    }
+
+    .search{
+        .rem(width, 530);
+        background-color: orchid;
+    }
+}
+
+.swipe{
+    width: 100%;
+    .rem(height, 200);
+    background-color: #999;
+    .rem(margin-top, 10);
+}
+
+.nav{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .rem(margin-top,10);
+    div{
+        .rem(width, 120);
+        .rem(height,120);
+        .rem(line-height, 120);
+        .rem(font-size, 14);
+        text-align: center;
+        &:nth-child(odd){
+            background-color: #d24353;
+        }
+        &:nth-child(even){
+            background-color: #d78391;
+        }
+    }
+}
+
+.content{
+    display: flex;
+    .rem(margin-top,10);
+
+    .left-content{
+        .rem(width,300);
+    }
+
+    .right-content{
+        .rem(width,300);
+    }
+
+    .tl{
+        text-align: center;
+    }
+
+    .list{
+        display: flex;
+        flex-wrap: wrap;
+
+        .item{
+            .rem(width, 150);
+            .rem(height, 100);
+            .rem(line-height, 100);
+            text-align: center;
+            .rem(font-size, 14);
+            &:nth-child(odd){
+                background-color: #d24353;
+            }
+            &:nth-child(even){
+                background-color: #d78391;
+            }
+        }
+    }
+}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+    .rem(font-size, 14);
+    .rem(margin-top,10);
+    div{
+        .rem(width,120);
+        .rem(height, 100);
+        text-align: center;
+        .rem(line-height, 100);
+
+        &:nth-child(odd){
+            background-color: #cccccc;
+        }
+
+        &:nth-child(even){
+            background-color: orchid;
+        }
+    }
+}
+
+
+
+      
