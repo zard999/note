@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-27 09:20:17
- * @LastEditTime: 2021-11-08 23:31:42
+ * @LastEditTime: 2021-11-09 19:49:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \note\React\react.md
@@ -110,6 +110,21 @@ onkeyup
   - 仅第一次 render 后执行：提供一个空数组作为依赖性。比如，useEffect(() => {}, [])
   - 第一次以及依赖性发生变化后执行：提供依赖项数组。比如，useEffect(() => {}, [deps])
   - 组件 unmount 后执行：返回一个回调函数。比如，useEffect(() => { return () => {} }, [])
+- useCallback: 缓存回调函数，只有当 count 发生变化时，我们才需要重新定义一个回调函数
+  - useCallback(fn,deps)：fn 是定义的回调函数，deps 是依赖的变量数组
+- useMemo: 缓存计算的结果:
+  - useMemo(fn, deps)
+  - useCallBack 的功能其实是可以用 useMemo 来实现的：返回一个函数作为缓存结果
+  - useCallback 和 useMemo 只做了同一件事情：建立了一个绑定某个结果到依赖数据的关系。只有当依赖变了，这个结果才需要被重新得
+- useRef：在多次渲染之间共享数据
+  - const myRef = useRef(initialValue)
+  - 可以使用 useRef 来清除计时器
+  - 保存某个 DOM 节点的引用：获取真实 DOM，通过 inputEl.current 就能访问到真实 DOM
+- useContext：定义全局状态
+  - 现在根组件上创建一个 Context：const MyContext = React.createContext(initialValue); => 具有 Provider 属性
+  - const value = useContext(MyContext)
+  - 会让调试变得困难，因为你很难跟踪某个 Context 的变化究竟是如何产生的
+  - 会让组件的复用变得困难，因为一个组件如果使用了某个 Context，它就必须确保被用到的地方一定有这个 Context 的 Provider 在其父组件的路径上
 
 #### hook 必须避免的错误
 
