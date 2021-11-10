@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-27 09:20:17
- * @LastEditTime: 2021-11-09 19:49:58
+ * @LastEditTime: 2021-11-10 15:28:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \note\React\react.md
@@ -11,8 +11,8 @@
 
 onchange: 表单发生改变并且失去焦点
 oninput: 表单发生改变就触发
-onkeydown
-onkeyup
+onkeydown: 键盘只要按下就会触发 获取不到最新输入的那个字母
+onkeyup：键盘按下再抬起才会触发 获取所有的数据 包括最新输入的内容
 
 #### 生命周期
 
