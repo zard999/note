@@ -5,8 +5,8 @@ const source = {
   },
 };
 
-const tar = {};
+// const tar = {};
 // Object.assign(tar, source);
 // console.log(tar);
-Object.defineProperties(tar, Object.getOwnPropertyDescriptors(source));
-console.log(Object.getOwnPropertyDescriptor(tar, "foo"));
+// Object.defineProperties(tar, Object.getOwnPropertyDescriptors(source));
+// console.log(Object.getOwnPropertyDescriptor(tar, "foo"));

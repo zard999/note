@@ -11,15 +11,15 @@
 
 从上到下、从左到右、以行为单位
 
-#### 为什么 body 中的 height-line 要用小数
+#### 为什么 body 中的 line-height 要用小数
 
 body{
 font-size: 14px;
-height-line: 1.5;
+line-height: 1.5;
 
 <!-- 这个行高会给子元素继承 -->
 
-height-line: 150%;
+line-height: 150%;
 
 <!-- 子元素的行高都为21px -->
 

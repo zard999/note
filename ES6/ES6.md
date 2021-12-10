@@ -93,10 +93,15 @@ foo.bind().name: bound foo
 
 #### defineProperty
 
+- Object.defineProperty(obj,propertyName,{}) 给对象添加属性，指定描述符
 - configurable: 可配置的，false => 不能删除
 - enumerable: 可枚举的，
 - writable: 可写,false = >不能重新赋值，严格模式会报错，删除可以正常删除
 - value: 值
+
+#### hasOwnProperty
+
+obj.hasOwnProperty(prop) 判断 prop 是否是 obj 自身的属性 如果是则为 true 反之则是 false
 
 #### getter,setter
 

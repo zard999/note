@@ -46,17 +46,16 @@
           name: "黄九",
         },
       ];
-
+        
       Array.prototype.myForEach = function (fn) {
         var arr = this,
           len = arr.length,
           arr2 = arguments[1] || window;
 
-        for (var i = 0; i < len; i++) {
-          fn.call(arr2, arr[i], i, arr);
+        for (var i = 0; i < len; i++) {   
+
         }
       };
-
       data.myForEach(function (item, index, array) {
         this[index].innerHTML = item.id + ". " + item.name;
       }, oLi);
